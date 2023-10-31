@@ -1,1 +1,19 @@
-<p>hero works!</p>
+<p>tuesday</p>
+<table>
+    <thead>
+        <tr>Id:</tr>
+        <tr>Name:</tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let hero of herolist">
+             <td>{{hero.Id}}</td>
+             <td>{{hero.Name}}</td>
+             <td><button (click)="delete(hero.Id)">delete</button></td>
+        </tr>
+        
+    </tbody>
+</table>
+<button (click)="getAll()">GetAll</button>
+<button (click)="getById(2)">GetById</button>
+<button (click)="create(herolist[0])">Create</button>
