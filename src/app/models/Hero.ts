@@ -1,7 +1,8 @@
 export class Hero{
-    Id:number=0;
-    Name:string=""
-    RealName:string="";
-    Place:string="";
-    DebutYear:Date=new Date();
-  }
+  id:number=0;
+  //id == Id ?? is it the same?? ascii characters
+  name:string=""
+  realName:string="";
+  place:string="";
+  debutYear:Date=new Date();
+}

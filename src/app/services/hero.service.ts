@@ -19,9 +19,9 @@ export class HeroService {
 
   herolist:Hero[]=[
 
-    {Id:1,Name:"Superman",RealName:"Clark Kent",Place:"Krypton",DebutYear:new Date},
-    {Id:2,Name:"Batman",RealName:"Bruce Wayne",Place:"Gotham",DebutYear:new Date},
-    {Id:3,Name:"SpiderMan",RealName:"Peter Parker",Place:"Brooklin",DebutYear:new Date},
+    {id:1,name:"Superman",realName:"Clark Kent",place:"Krypton",debutYear:new Date},
+    {id:2,name:"Batman",realName:"Bruce Wayne",place:"Gotham",debutYear:new Date},
+    {id:3,name:"SpiderMan",realName:"Peter Parker",place:"Brooklin",debutYear:new Date},
     ];
   
   getAllHardcoded():Hero[]{
@@ -36,8 +36,11 @@ export class HeroService {
   getById(id:number):Observable<Hero>{
     return this.http.get<Hero>(this.apiUrl+id);
   } 
-  Delete(id:number):void{
-
+  create(hero: Hero):Observable<Hero> {
+    return this.http.post<Hero>(`${this.apiUrl}`, hero);
+  }
+  Delete(id:number):Observable<Hero>{
+    return this.http.delete<Hero>(this.apiUrl+id);
   } 
 }
 //connection to sa server happens like this

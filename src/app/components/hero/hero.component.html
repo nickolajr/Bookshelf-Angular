@@ -7,13 +7,28 @@
 
     <tbody>
         <tr *ngFor="let hero of herolist">
-             <td>{{hero.Id}}</td>
-             <td>{{hero.Name}}</td>
-             <td><button (click)="delete(hero.Id)">delete</button></td>
+             <td>{{hero.id}}</td>           
+             <td>{{hero.name}}</td>
+             <td>{{hero.realName}}</td>
+             <td><button (click)="delete(hero.id)">delete</button></td>
         </tr>
         
     </tbody>
 </table>
-<button (click)="getAll()">GetAll</button>
-<button (click)="getById(2)">GetById</button>
-<button (click)="create(herolist[0])">Create</button>
+
+
+<button (click)="getAll()">GetAll</button><br>
+
+<br><form [formGroup]="heroform">
+    <label>Id</label>
+    <input type="number" formControlName="id">
+    <button (click)="getById()">GetById</button>
+  </form><br>
+
+<br><form [formGroup]="heroform">
+    <label>HeroName</label><input type="text" formControlName="name"><br>
+    <label>RealName</label><input type="text" formControlName="realName"><br>
+    <label>place</label><input type="text" formControlName="place"><br>
+    <label>DebutYear</label><input type="date" formControlName="debutYear"><br>
+    <button (click)="create(herolist[0])">Create</button><br>
+</form>
