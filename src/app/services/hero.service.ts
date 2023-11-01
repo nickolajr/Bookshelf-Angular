@@ -37,7 +37,7 @@ export class HeroService {
     return this.http.get<Hero>(this.apiUrl+id);
   } 
   create(hero: Hero):Observable<Hero> {
-    return this.http.post<Hero>(`${this.apiUrl}`, hero);
+    return this.http.post<Hero>(this.apiUrl, hero);
   }
   Delete(id:number):Observable<Hero>{
     return this.http.delete<Hero>(this.apiUrl+id);

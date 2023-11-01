@@ -65,7 +65,7 @@ heroform = new FormGroup({
 
 
 create(hero:Hero):void{
-  
+  this.heroform.value.id = 0;
   this.service.create(<Hero>this.heroform.value).subscribe(data => {
     console.log(data);
     this.herolist.push(data);
