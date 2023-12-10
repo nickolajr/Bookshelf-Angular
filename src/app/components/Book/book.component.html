@@ -1,0 +1,32 @@
+<h1>Book List</h1>
+<table>
+    
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Format</th>
+            <th>CoverImage</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let book of booklist">
+          <td>{{book.id}}</td><br>
+          <td>{{book.title.english}}</td><br>
+          <td>{{book.title.romaji}}</td> <br>
+          <img src={{book.coverImage.large}}/><br>
+          <button (click)="Addbook(book,1)">AddBook</button><br>
+          
+        </tr>
+      </tbody>
+</table>
+
+
+
+
+<label>Enter Title</label><input type="text" (change)="Title($event)"><br>
+<button (click)="GetByTitle()">Test</button><br>
+
+

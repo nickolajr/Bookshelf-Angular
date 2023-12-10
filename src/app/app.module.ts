@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeroComponent } from './components/hero/hero.component';
+import { BookComponent } from './components/Book/book.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TeamComponent } from './components/team/team.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    HeroComponent,
+    BookComponent,
     TeamComponent
   ],
   //this is for all "finish modules" that we want to use
