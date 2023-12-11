@@ -6,12 +6,14 @@ import { BookComponent } from './components/Book/book.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'; // Import FormsModule here
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
