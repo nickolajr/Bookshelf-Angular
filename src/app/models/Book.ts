@@ -8,7 +8,6 @@ export class Book{
   status:string="";
   format:string="";
   showdetails:boolean=false;
-  pages: number=0;
 }
 class CoverImage{
   large?:string="";
