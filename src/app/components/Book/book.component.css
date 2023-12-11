@@ -49,7 +49,37 @@ button.book-cover {
 }
 
 .volume {
-  border-width: 2px;
-  border: #888;
-  border-radius: 2px;
+  margin: 2rem;
+
+  text-align: center;
+
+  /* Border */
+  border: 2px solid #2e79eb;
+  border-radius: 5px;
+  
 }
+
+.volume p {
+  margin: 0;
+}
+
+.fancy-button {
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  background-color: #2e79eb;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+
+  /* Border */
+  border-radius: 5px;
+}
+
+.volume .volume-header {
+  margin-bottom: .2rem;
+  font-size: large;
+  font-weight: bold;
+  color: #2e79eb;
+} 

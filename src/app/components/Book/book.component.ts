@@ -44,6 +44,10 @@ closeDetails(book: Book) {
   this.toggleDetails(book);
 }
 
+toggleVolume(volume: Volume) {
+  volume.showdetails = !volume.showdetails;
+} 
+
 title:string="";
 
 //it has a DI on the parameter
