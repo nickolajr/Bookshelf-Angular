@@ -57,7 +57,7 @@ export class BookService {
       author: "",
       volumes: 0,
       pages: 0,
-      coverImg: book.coverImage.large
+      coverImage: book.coverImage.large
     }
 
     const body = JSON.stringify({ AccountId: accountId, book: newBook });
