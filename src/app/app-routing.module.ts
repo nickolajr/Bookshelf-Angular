@@ -19,6 +19,7 @@ const routes: Routes = [
     { path: 'change-email', component: ChangeEmailComponent },
     { path: 'change-username', component: ChangeUsernameComponent },
   ] },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
