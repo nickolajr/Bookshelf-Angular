@@ -62,7 +62,6 @@
                                 <div class="modal-header">
                                     <h2>{{lib.book.title}}</h2>
                                     
-                                    <h2>Pages read: {{lib.progress.pagesRead}}</h2>
                                     <h2>Volumes read: {{lib.progress.volumesRead}}</h2>
 
                                     <!-- Create Volume -->
@@ -78,7 +77,7 @@
                                             <!-- Dropdown -->
                                             <div *ngIf="volume.showdetails">
                                                 <p class="volume-header">Statistics</p>
-                                                <p>Pages read: {{lib.progress.pagesRead}}</p>
+                                                <p>Pages read: {{volume.pagesRead}}</p>
                                                 <p>Pages total: {{lib.book.pages}}</p>
 
                                                 <!-- Update pages read -->
