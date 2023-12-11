@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-change-email',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class ChangeEmailComponent {
 
+  constructor(private service: AccountService) { }
+
+  ngOnInit(): void {
+    this.GetAccount();
+  }
+
+  GetAccount() {
+    return // TODO: Get account
+  }
 }
