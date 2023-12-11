@@ -3,10 +3,10 @@
 
 <label>Enter Title</label><input type="text" (change)="Title($event)"><br>
 <button (click)="GetByTitle()">Test</button><br>
-
+<button (click)="GetBookList()">Get All Books</button><br>
 <table class="center-div">
     <tbody class="center-div">
-        <div class="book-list">
+        <div class="book-list" *ngIf="booklist.length >0">
             <div *ngFor="let book of booklist">
                 <button (click)="toggleDetails(book)">
                 <img [src]="book.coverImage.large" alt="Book cover">
@@ -26,14 +26,13 @@
                             <h2 *ngIf="!book.title.english">{{book.title.romaji}}</h2>
                         </div>
                     </div>
-                </div>
-
-                
-
+                </div>              
             </div>         
         </div>
-    </tbody>
-</table>
+        <div *ngIf="booklist.length === 0">
+            <h2>No books found</h2>
+    
+
 
 
 

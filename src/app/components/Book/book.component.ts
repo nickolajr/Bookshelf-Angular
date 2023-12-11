@@ -59,8 +59,24 @@ Addbook(book: Book, accountId: number){
     
   });
 }
+GetBookList(){
+  const accountId = sessionStorage.getItem('accountId');
+  if (!accountId) {
+    console.log('No accountId found in session storage');
+    return;
+  }
 
-
-
-
+  this.service.GetBookList(accountId).subscribe((response: any) => {
+    console.log(response);
+    this.booklist = response;
+    console.log(this.booklist);
+  });
 }
+}
+
+
+
+
+
+
+
