@@ -11,6 +11,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangeUsernameComponent } from './change-username/change-username.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ChangeUsernameComponent } from './change-username/change-username.compo
     SettingsComponent,
     ChangePasswordComponent,
     ChangeEmailComponent,
-    ChangeUsernameComponent
+    ChangeUsernameComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
