@@ -13,10 +13,23 @@ interface ApiResponse {
   styleUrls: ['./book.component.css']
 })
 export class BookComponent {
+
 public booklist:Book[]=[];
+public showModal: boolean = false;
+
 toggleDetails(book:Book) {
+  if (this.showModal) return;
   book.showdetails = !book.showdetails;
+  if (book.showdetails) {
+    this.showModal = true;
+  }
 }
+
+closeDetails(book: Book) {
+  this.showModal = false;
+  this.toggleDetails(book);
+}
+
 title:string="";
 
 //it has a DI on the parameter

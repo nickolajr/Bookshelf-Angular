@@ -11,4 +11,39 @@ button.book-cover {
   .book-list {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
   }
+
+.center-div {
+  text-align: center;
+  align-items: center ;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for modal dimensions */
+  width: 50%; /* Full width */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(85, 85, 85,0.6);
+
+  border-radius: 5px;
+}
+
+.modal-content {
+  /* Round */
+  border-radius: 5px;
+
+  background-color: black;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
