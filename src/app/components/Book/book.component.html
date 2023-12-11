@@ -1,8 +1,10 @@
 <div class="center-div">
-    <h1>Book List</h1>   
+    <h1>Book List</h1>
+
+    <!-- Search -->
+    <div class="search">
         <label>Enter Title</label><input type="text" (change)="Title($event)"><br>
         <button (click)="GetByTitle()">Test</button><br>
-        <button (click)="GetBookList()">Get All Books</button><br>
         <table class="center-div">
             <tbody class="center-div">
                 <div class="book-list" *ngIf="booklist.length >0">
@@ -35,3 +37,37 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Library -->
+    <div>
+        <h1>Library</h1>
+        <table class="center-div">
+            <tbody class="center-div">
+                <div class="book-list" *ngIf="Library.length >0">
+                    <div *ngFor="let lib of Library">
+                        <button (click)="toggleDetails(lib.book)">
+                        <img *ngIf="lib.book.coverImage" [src]="lib.book.coverImage" alt="Book cover">
+                        <div>
+                            <td>{{lib.book.title}}</td>
+                        </div>
+                        </button>
+        
+                        <!-- Modal -->
+                        <div class="modal" *ngIf="lib.book.showdetails">
+                            <div class="modal-content">
+                                <span class="close" (click)="closeDetails(lib.book)">&times;</span>
+                                <div class="modal-header">
+                                    <h2>{{lib.book.title}}</h2>
+            
+                                </div>
+                            </div>
+                        </div>              
+                    </div>         
+                </div>
+                <div *ngIf="Library.length === 0">
+                    <h2>No books found</h2>
+                </div>
+            </tbody>
+        </table>
+    </div>
+</div>

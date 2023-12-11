@@ -1,12 +1,19 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Book } from 'src/app/models/Book';
+import { BookProgress } from 'src/app/models/BookProgress';
 import { BookService } from 'src/app/services/book.service';
 interface ApiResponse {
   data: {
     Media: Book;
   };
 }
+
+interface BookList {
+  progress: BookProgress;
+  book: Book;
+}
+
 @Component({
   selector: 'BookInfo', 
   templateUrl: './book.component.html',
@@ -15,6 +22,9 @@ interface ApiResponse {
 export class BookComponent {
 
 public booklist:Book[]=[];
+
+public Library: BookList[] = [];
+
 public showModal: boolean = false;
 
 toggleDetails(book:Book) {
@@ -34,10 +44,12 @@ title:string="";
 
 //it has a DI on the parameter
 //this line tells us that we have a prop called service- its a design pattern
-constructor(private service:BookService) { 
-  
+constructor(private service:BookService) {}
 
+ngOnInit(): void {
+  this.GetBookList();
 }
+
 Title(event:any){
   this.title=event.target.value;
   console.log(this.title);
@@ -76,7 +88,8 @@ GetBookList(){
 
   this.service.GetBookList(accountId).subscribe((response: any) => {
     console.log(response);
-    this.booklist = response;
+    this.booklist = [];
+    this.Library = response;
     console.log(this.booklist);
   });
 }

@@ -3,11 +3,19 @@ import { Book } from '../models/Book';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../enviroment/enviroment';
 import { Observable } from 'rxjs';
+import { BookProgress } from '../models/BookProgress';
 
 interface ApiResponse {
   data: {
     Media: Book;
   };
+}
+
+interface BookListResponse {
+  response: [
+    progress: BookProgress,
+    book: Book,
+  ]
 }
 //decorator
 @Injectable({
@@ -33,12 +41,12 @@ export class BookService {
     }, error => {console.log(error);});
     return data;
   }
-  GetBookList(accountId: string): Observable<ApiResponse> {
+  GetBookList(accountId: string): Observable<BookListResponse> {
     console.log("getbooklist");
     const headers = { 'content-type': 'application/json'} 
     const body = JSON.stringify({ id: accountId });
     console.log(body);
-    let data = this.http.post<ApiResponse>(this.apiUrl + "GetBookList", body,{'headers':headers});
+    let data = this.http.post<BookListResponse>(this.apiUrl + "GetBookList", body,{'headers':headers});
     data.subscribe(data => {
       console.log(data);
     }, error => {console.log(error);});
