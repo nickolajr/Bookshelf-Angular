@@ -66,6 +66,7 @@ GetByTitle(){
   });
 }
 AddBook(book: Book){
+  console.log(`AddBook(${book})`)
   const accountId = sessionStorage.getItem('accountId');
   if (!accountId) {
     console.log('No accountId found in session storage');

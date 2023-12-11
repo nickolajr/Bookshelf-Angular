@@ -47,9 +47,6 @@ export class BookService {
     const body = JSON.stringify({ id: accountId });
     console.log(body);
     let data = this.http.post<BookListResponse>(this.apiUrl + "GetBookList", body,{'headers':headers});
-    data.subscribe(data => {
-      console.log(data);
-    }, error => {console.log(error);});
     return data;
   }
 
