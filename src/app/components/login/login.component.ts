@@ -18,7 +18,7 @@ export class LoginComponent {
       (data: any) => {
         if (data.accountId) {
           sessionStorage.setItem('accountId', data.accountId); 
-          this.router.navigate(['/book']);
+          this.router.navigate(['/library']);
         } else {
           console.log(data);
           alert('Login failed');

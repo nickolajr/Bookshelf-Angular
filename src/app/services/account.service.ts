@@ -30,6 +30,9 @@ export class AccountService {
   
   constructor(private http: HttpClient) { }
 
+  register(accountData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}Create`, accountData);
+  }
 
 
   GetAccount(id: number): Observable<ApiResponse> {

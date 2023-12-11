@@ -36,7 +36,8 @@
             <a routerLink="settings" class="link">Settings</a><br>
             <a routerLink="help" class="link">Help</a><br>
             <a *ngIf="isLoggedIn == false" routerLink="login" class="link">Login</a>
-            <a *ngIf="isLoggedIn == true" routerLink="logout" class="link">Logout</a>
+            <button *ngIf="isLoggedIn == true" (click)="logout()" class="link">Logout</button>
+            <a *ngIf="isLoggedIn == false" routerLink="register" class="link">Register</a>
             <p class="subtext">Made by TrickFire</p>
         </div>
           

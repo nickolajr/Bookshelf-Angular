@@ -12,6 +12,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangeUsernameComponent } from './change-username/change-username.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     ChangePasswordComponent,
     ChangeEmailComponent,
     ChangeUsernameComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    RegisterComponent,   
   ],
   imports: [
     BrowserModule,
