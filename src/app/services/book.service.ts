@@ -68,10 +68,6 @@ export class BookService {
     const body = JSON.stringify({ AccountId: accountId, book: newBook });
     console.log(body);
     let data = this.http.post<ApiResponse>(this.apiUrl + "DbAddBook", body,{'headers':headers});
-    data.subscribe(data => {
-      console.log(data);
-      
-    }, error => {console.log(error);});
     return data;
   }
   
