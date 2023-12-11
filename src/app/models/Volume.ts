@@ -1,6 +1,6 @@
 export class Volume
 {
-    VolumeId:number=0;
-    VolNumber:number=0;
-    BookId:number=0; 
+    volumeId:number=0;
+    volNumber:number=0;
+    bookId:number=0; 
 }

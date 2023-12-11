@@ -47,3 +47,9 @@ button.book-cover {
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
 }
+
+.volume {
+  border-width: 2px;
+  border: #888;
+  border-radius: 2px;
+}

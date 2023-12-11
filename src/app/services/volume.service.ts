@@ -33,7 +33,7 @@ export class VolumeService {
 
         let headers = { 'content-type': 'application/json' }
 
-        let data = this.http.post<Volume>(`${this.apiUrl}CreateBookVol`, body, { 'headers': headers });
+        let data = this.http.post<Volume>(`${this.apiUrl}CreateVol`, body, { 'headers': headers });
         return data;
     }
 }

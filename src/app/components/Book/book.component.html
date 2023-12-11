@@ -26,10 +26,7 @@
                                     <h3 *ngIf="book.title.english">{{book.title.english}}</h3>
                                     <h3 *ngIf="!book.title.english">{{book.title.romaji}}</h3>
 
-                                    <!-- Create Volume -->
 
-
-                                    <!-- List Volumes -->
                                     
                                     
                                 </div>
@@ -65,8 +62,30 @@
                                 <div class="modal-header">
                                     <h2>{{lib.book.title}}</h2>
                                     
+<<<<<<< Updated upstream
                                     <h3>Pages read: {{lib.progress.pagesRead}}</h3>
                                     <h3>Volumes read: {{lib.progress.volumesRead}}</h3>
+=======
+                                    <h2>Pages read: {{lib.progress.pagesRead}}</h2>
+                                    <h2>Volumes read: {{lib.progress.volumesRead}}</h2>
+
+                                    <!-- Create Volume -->
+                                    <div class="create-volume">
+                                        <button (click)="CreateBookVolume(lib.book.id)">Create Volume</button><br>
+                                    </div>
+
+                                    <!-- List Volumes -->
+                                    <div *ngFor="let volume of bookVolumes">
+                                        <div class="volume">
+                                            <button>Volume Number: {{volume.volNumber}}</button>
+                                            
+                                            <div>
+                                                <h2>Pages read: {{lib.progress.pagesRead}}</h2>
+                                                <h2>Pages total: {{lib.book.pages}}</h2>
+                                            </div>                 
+                                        </div>
+                                    </div>
+>>>>>>> Stashed changes
             
                                 </div>
                             </div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Book } from 'src/app/models/Book';
 import { BookProgress } from 'src/app/models/BookProgress';
+import { Volume } from 'src/app/models/Volume';
 import { BookService } from 'src/app/services/book.service';
 import { VolumeService } from 'src/app/services/volume.service';
 interface ApiResponse {
@@ -25,6 +26,7 @@ export class BookComponent {
 public booklist:Book[]=[];
 
 public Library: BookList[] = [];
+public bookVolumes: Volume[] = [];
 
 public showModal: boolean = false;
 
@@ -52,11 +54,15 @@ ngOnInit(): void {
   this.GetBookList();
 }
 
+// label changes
 Title(event:any){
   this.title=event.target.value;
   console.log(this.title);
-
 }
+
+
+
+// Book stuff
 GetByTitle(){
   console.log("component");
   this.service.GetByTitle(this.title).subscribe((response: ApiResponse) => {
@@ -67,6 +73,7 @@ GetByTitle(){
     console.log(this.booklist[0].title.english);
   });
 }
+
 AddBook(book: Book){
   console.log(`AddBook(${book})`)
   const accountId = sessionStorage.getItem('accountId');
@@ -78,10 +85,9 @@ AddBook(book: Book){
   
   let id: number = Number(accountId);
   this.service.AddBook(book, id).subscribe((response: ApiResponse) => {
-    console.log(response);
-    
   });
 }
+
 GetBookList(){
   const accountId = sessionStorage.getItem('accountId');
   if (!accountId) {
@@ -97,14 +103,21 @@ GetBookList(){
   });
 }
 
+
+// Volume stuff
 GetBookVolumes(bookId: number) {
   this.volumeService.GetBookVolumes(bookId).subscribe((response: any) => {
     console.log(response);
+    this.bookVolumes = response;
+    console.log(this.bookVolumes[0].volNumber)
   });
 }
 
-CreateBookVolume(bookId: number, volNum: number) {
-  this.volumeService.CreateBookVolume(bookId, volNum).subscribe((response: any) => {
+CreateBookVolume(bookId: number) {
+  const volumeAmount = this.bookVolumes.length;
+  if(volumeAmount < 0 || volumeAmount == null) return;
+  let volNumber = volumeAmount + 1;
+  this.volumeService.CreateBookVolume(bookId, volNumber).subscribe((response: any) => {
     console.log(response);
   });
 }
