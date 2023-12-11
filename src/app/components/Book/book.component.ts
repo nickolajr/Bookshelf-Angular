@@ -57,12 +57,14 @@ AddBook(book: Book){
   const accountId = sessionStorage.getItem('accountId');
   if (!accountId) {
     console.log('No accountId found in session storage');
+    console.log(accountId);
     return;
   }
   
   let id: number = Number(accountId);
   this.service.AddBook(book, id).subscribe((response: ApiResponse) => {
     console.log(response);
+    
   });
 }
 GetBookList(){

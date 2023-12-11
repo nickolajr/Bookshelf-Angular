@@ -60,7 +60,7 @@ export class BookService {
       coverImg: book.coverImage.large
     }
 
-    const body = JSON.stringify({ AccountId: accountId, Book: newBook });
+    const body = JSON.stringify({ AccountId: accountId, book: newBook });
     console.log(body);
     let data = this.http.post<ApiResponse>(this.apiUrl + "DbAddBook", body,{'headers':headers});
     data.subscribe(data => {
