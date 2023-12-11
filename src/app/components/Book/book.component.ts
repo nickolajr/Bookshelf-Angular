@@ -124,5 +124,17 @@ CreateBookVolume(bookId: number) {
   this.volumeService.CreateBookVolume(bookId, volNumber).subscribe((response: any) => {
     console.log(response);
   });
+  
+}
+deleteBook(bookId:number){
+  const accountId = sessionStorage.getItem('accountId');
+  if (!accountId) {
+    console.log('No accountId found in session storage');
+    console.log(accountId);
+    return;
+  }
+  this.service.deleteBookFromLibrary(parseInt(accountId),bookId).subscribe(() => {
+    console.log('Book deleted');
+  });
 }
 }

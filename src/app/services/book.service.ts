@@ -70,6 +70,9 @@ export class BookService {
     let data = this.http.post<ApiResponse>(this.apiUrl + "DbAddBook", body,{'headers':headers});
     return data;
   }
+  deleteBookFromLibrary(accountId: number, bookId: number) {
+    return this.http.delete(`${this.apiUrl}DelBook?accountId=${accountId}&bookId=${bookId}`);
+  }
   
 
   //observable is somthing that we listen to for data async
