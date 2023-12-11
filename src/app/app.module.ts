@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BookComponent } from './components/Book/book.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TeamComponent } from './components/team/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -17,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     BookComponent,
-    TeamComponent
+    LoginComponent
   ],
   //this is for all "finish modules" that we want to use
   imports: [
