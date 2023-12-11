@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BookComponent } from './components/Book/book.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TeamComponent } from './components/team/team.component';
+import { TeamComponent } from './components/team/login.component';
 import { HttpClientModule } from '@angular/common/http';
 
 

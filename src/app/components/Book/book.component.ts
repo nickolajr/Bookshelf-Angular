@@ -14,6 +14,9 @@ interface ApiResponse {
 })
 export class BookComponent {
 public booklist:Book[]=[];
+toggleDetails(book:Book) {
+  book.showdetails = !book.showdetails;
+}
 title:string="";
 
 //it has a DI on the parameter
@@ -43,6 +46,7 @@ Addbook(book: Book, accountId: number){
     
   });
 }
+
 
 
 

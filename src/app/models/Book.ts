@@ -7,6 +7,7 @@ export class Book{
   volumes?:number=0;
   status:string="";
   format:string="";
+  showdetails:boolean=false;
 }
 class CoverImage{
   large?:string="";

@@ -1,0 +1,14 @@
+button.book-cover {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+    display: inline-block;
+  }
+  .book-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
