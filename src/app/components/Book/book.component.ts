@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Book } from 'src/app/models/Book';
 import { BookProgress } from 'src/app/models/BookProgress';
 import { BookService } from 'src/app/services/book.service';
+import { VolumeService } from 'src/app/services/volume.service';
 interface ApiResponse {
   data: {
     Media: Book;
@@ -32,6 +33,7 @@ toggleDetails(book:Book) {
   book.showdetails = !book.showdetails;
   if (book.showdetails) {
     this.showModal = true;
+    this.GetBookVolumes(book.id);
   }
 }
 
@@ -44,7 +46,7 @@ title:string="";
 
 //it has a DI on the parameter
 //this line tells us that we have a prop called service- its a design pattern
-constructor(private service:BookService) {}
+constructor(private service:BookService, private volumeService: VolumeService) {}
 
 ngOnInit(): void {
   this.GetBookList();
@@ -94,11 +96,16 @@ GetBookList(){
     console.log(this.booklist);
   });
 }
+
+GetBookVolumes(bookId: number) {
+  this.volumeService.GetBookVolumes(bookId).subscribe((response: any) => {
+    console.log(response);
+  });
 }
 
-
-
-
-
-
-
+CreateBookVolume(bookId: number, volNum: number) {
+  this.volumeService.CreateBookVolume(bookId, volNum).subscribe((response: any) => {
+    console.log(response);
+  });
+}
+}
