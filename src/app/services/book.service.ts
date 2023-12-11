@@ -33,6 +33,17 @@ export class BookService {
     }, error => {console.log(error);});
     return data;
   }
+  GetBookList(accountId: string): Observable<ApiResponse> {
+    console.log("getbooklist");
+    const headers = { 'content-type': 'application/json'} 
+    const body = JSON.stringify({ id: accountId });
+    console.log(body);
+    let data = this.http.post<ApiResponse>(this.apiUrl + "GetBookList", body,{'headers':headers});
+    data.subscribe(data => {
+      console.log(data);
+    }, error => {console.log(error);});
+    return data;
+  }
 
 
   Addbook(book: Book, accountId: number): Observable<ApiResponse> {
@@ -58,6 +69,7 @@ export class BookService {
     }, error => {console.log(error);});
     return data;
   }
+  
 
   //observable is somthing that we listen to for data async
 
