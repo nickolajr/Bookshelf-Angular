@@ -7,3 +7,11 @@
     <p>Name: {{acc.name}}</p>
     <p>Email: {{acc.email}}</p>
 </div>
+<button (click)="toggle()">Delete Account</button>
+<div class="modal" *ngIf="isopen">
+    <div class="center-div">
+        <span class="close" (click)="toggle()">&times;</span>
+        <h2>you sure you wanna delete you Account</h2>
+        <button (click)="DelAcc()">Delete Account</button>
+    </div>
+</div>

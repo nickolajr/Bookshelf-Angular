@@ -46,5 +46,11 @@ export class AccountService {
     return data;
 
   }
+  DelAcc(id: number): Observable<ApiResponse> {
+    let headers = { 'content-type': 'application/json' };
+
+    let data = this.http.delete<ApiResponse>(`${this.apiUrl}DelAcc?id=${id}`, { headers: headers });
+    return data;
+  }
 
 }
