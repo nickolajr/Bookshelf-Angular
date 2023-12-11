@@ -53,10 +53,16 @@ GetByTitle(){
     console.log(this.booklist[0].title.english);
   });
 }
-Addbook(book: Book, accountId: number){
-  this.service.Addbook(book, accountId).subscribe((response: ApiResponse) => {
+AddBook(book: Book){
+  const accountId = sessionStorage.getItem('accountId');
+  if (!accountId) {
+    console.log('No accountId found in session storage');
+    return;
+  }
+  
+  let id: number = Number(accountId);
+  this.service.AddBook(book, id).subscribe((response: ApiResponse) => {
     console.log(response);
-    
   });
 }
 GetBookList(){

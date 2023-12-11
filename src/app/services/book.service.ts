@@ -46,7 +46,7 @@ export class BookService {
   }
 
 
-  Addbook(book: Book, accountId: number): Observable<ApiResponse> {
+  AddBook(book: Book, accountId: number): Observable<ApiResponse> {
     console.log("addbook");
     const headers = { 'content-type': 'application/json'} 
 

@@ -20,8 +20,10 @@
                             <div class="modal-content">
                                 <span class="close" (click)="closeDetails(book)">&times;</span>
                                 <div class="modal-header">
+                                    <button (click)="AddBook(book)">Add To Library</button>
                                     <h2 *ngIf="book.title.english">{{book.title.english}}</h2>
                                     <h2 *ngIf="!book.title.english">{{book.title.romaji}}</h2>
+                                    
                                 </div>
                             </div>
                         </div>              
