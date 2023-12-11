@@ -1,44 +1,35 @@
 <div class="center-div">
-<h1>Book List</h1>
-
-<label>Enter Title</label><input type="text" (change)="Title($event)"><br>
-<button (click)="GetByTitle()">Test</button><br>
-<button (click)="GetBookList()">Get All Books</button><br>
-<table class="center-div">
-    <tbody class="center-div">
-        <div class="book-list" *ngIf="booklist.length >0">
-            <div *ngFor="let book of booklist">
-                <button (click)="toggleDetails(book)">
-                <img [src]="book.coverImage.large" alt="Book cover">
-                <div>
-                    <td *ngIf="book.title.english">{{book.title.english}}</td>
-                    <td *ngIf="!book.title.english">{{book.title.romaji}}</td>
-                    <!-- <td>{{book.title.romaji}}</td> -->
-                </div>
-                </button>
-
-                <!-- Modal -->
-                <div class="modal" *ngIf="book.showdetails">
-                    <div class="modal-content">
-                        <span class="close" (click)="closeDetails(book)">&times;</span>
-                        <div class="modal-header">
-                            <h2 *ngIf="book.title.english">{{book.title.english}}</h2>
-                            <h2 *ngIf="!book.title.english">{{book.title.romaji}}</h2>
+    <h1>Book List</h1>   
+        <label>Enter Title</label><input type="text" (change)="Title($event)"><br>
+        <button (click)="GetByTitle()">Test</button><br>
+        <button (click)="GetBookList()">Get All Books</button><br>
+        <table class="center-div">
+            <tbody class="center-div">
+                <div class="book-list" *ngIf="booklist.length >0">
+                    <div *ngFor="let book of booklist">
+                        <button (click)="toggleDetails(book)">
+                        <img *ngIf="book.coverImage" [src]="book.coverImage.large" alt="Book cover">
+                        <div>
+                            <td *ngIf="book.title.english">{{book.title.english}}</td>
+                            <td *ngIf="!book.title.english">{{book.title.romaji}}</td>
                         </div>
-                    </div>
-                </div>              
-            </div>         
-        </div>
-        <div *ngIf="booklist.length === 0">
-            <h2>No books found</h2>
-    
-
-
-
-
-</div>
-
-
-
-
-
+                        </button>
+        
+                        <!-- Modal -->
+                        <div class="modal" *ngIf="book.showdetails">
+                            <div class="modal-content">
+                                <span class="close" (click)="closeDetails(book)">&times;</span>
+                                <div class="modal-header">
+                                    <h2 *ngIf="book.title.english">{{book.title.english}}</h2>
+                                    <h2 *ngIf="!book.title.english">{{book.title.romaji}}</h2>
+                                </div>
+                            </div>
+                        </div>              
+                    </div>         
+                </div>
+                <div *ngIf="booklist.length === 0">
+                    <h2>No books found</h2>
+                </div>
+            </tbody>
+        </table>
+    </div>

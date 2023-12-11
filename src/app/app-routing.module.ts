@@ -12,7 +12,7 @@ import { ChangeUsernameComponent } from './change-username/change-username.compo
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'book', component: BookComponent },
+  { path: 'library', component: BookComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'settings', component: SettingsComponent, children: [
     { path: 'change-password', component: ChangePasswordComponent },
