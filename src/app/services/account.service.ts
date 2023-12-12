@@ -52,5 +52,20 @@ export class AccountService {
     let data = this.http.delete<ApiResponse>(`${this.apiUrl}DelAcc?id=${id}`, { headers: headers });
     return data;
   }
+  changeEmail(accountId: number, newEmail: string): Observable<any> {
+    let headers = { 'content-type': 'application/json' };
+    let body = { newEmail: newEmail };
+    return this.http.put<any>(`${this.apiUrl}ChangeEmail?accountId=${accountId}`, body, { headers: headers });
+  }
+  changePassword(accountId: number, newPassword: string): Observable<any> {
+    let headers = { 'content-type': 'application/json' };
+    let body = { newPassword: newPassword };
+    return this.http.put<any>(`${this.apiUrl}ChangePassword?accountId=${accountId}`, body, { headers: headers });
+  }
 
+  changeUsername(accountId: number, newUsername: string): Observable<any> {
+    let headers = { 'content-type': 'application/json' };
+    let body = { NewUsername: newUsername };
+    return this.http.put<any>(`${this.apiUrl}ChangeUsername?accountId=${accountId}`, body, { headers: headers });
+  }
 }

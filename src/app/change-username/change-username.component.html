@@ -7,7 +7,8 @@
         </div>
         <div class="stn-input">
             <label for="newUsername">New Username</label>
-            <input type="text" id="newUsername" name="newUsername" placeholder="New Username">
+            <input [(ngModel)]="newUsername" type="text" id="newUsername" name="newUsername" placeholder="New Username">
         </div>
+        <button (click)="changeUsername()">Change Username</button>
     </form>
 </div>
