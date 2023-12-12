@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Book } from 'src/app/models/Book';
 import { BookProgress } from 'src/app/models/BookProgress';
 import { Volume } from 'src/app/models/Volume';
 import { BookService } from 'src/app/services/book.service';
-import { VolumeService } from 'src/app/services/volume.service';
+import { ErrorResponse, VolumeService } from 'src/app/services/volume.service';
 interface ApiResponse {
   data: {
     Media: Book;
@@ -113,7 +114,11 @@ GetBookVolumes(bookId: number) {
   this.volumeService.GetBookVolumes(bookId).subscribe((response: any) => {
     console.log(response);
     this.bookVolumes = response;
-    console.log(this.bookVolumes[0].volNumber)
+    
+    // Verify volume progress
+    this.bookVolumes.forEach((volume: Volume) => {
+      this.volumeService.VerifyVolumeProgress(volume.volumeId, parseInt(sessionStorage.getItem('accountId') as string), bookId);
+    });
   });
 }
 
@@ -136,5 +141,15 @@ deleteBook(bookId:number){
   this.service.deleteBookFromLibrary(parseInt(accountId),bookId).subscribe(() => {
     console.log('Book deleted');
   });
+}
+
+
+
+
+CreateVolumeProgress(volumeId: number, accountId: number, bookId: number) {
+  this.volumeService.CreateVolumeProgress(volumeId, accountId, bookId).subscribe((response: any) => {
+    console.log(response);
+  });
+
 }
 }
