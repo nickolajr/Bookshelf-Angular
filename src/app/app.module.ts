@@ -13,6 +13,7 @@ import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangeUsernameComponent } from './change-username/change-username.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RegisterComponent } from './components/register/register.component';
+import { Location } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { RegisterComponent } from './components/register/register.component';
     ChangeEmailComponent,
     ChangeUsernameComponent,
     ToolbarComponent,
-    RegisterComponent,   
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,7 @@ import { RegisterComponent } from './components/register/register.component';
     FormsModule, // Add FormsModule to the imports array
     HttpClientModule
   ],
-  providers: [],
+  providers: [Location],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
