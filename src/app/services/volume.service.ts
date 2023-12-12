@@ -45,7 +45,7 @@ export class VolumeService {
         return data;
     }
 
-    GetVolumeProgress(volumeId: number, accountId: number): Observable<Volume> {
+    GetVolumeProgress(volumeId: number, accountId: number, bookId?: number): Observable<Volume> {
         let body = JSON.stringify({
             volumeId: volumeId,
             accountId: accountId
@@ -67,7 +67,7 @@ export class VolumeService {
 
                 if (error.status == 404) {
                     console.log('Volume progress not found, creating new progress');
-                    this.CreateVolumeProgress(volumeId, accountId, 0).subscribe((response) => {
+                    this.CreateVolumeProgress(volumeId, accountId, bookId as number).subscribe((response) => {
                         console.log({CreateResponse: response});
                         return response;
                     });
@@ -83,7 +83,7 @@ export class VolumeService {
 
     CreateVolumeProgress(volumeId: number, accountId: number, bookId: number) {
         let body = JSON.stringify({
-            volumeId: volumeId,
+            volId: volumeId,
             accountId: accountId,
             bookId: bookId
         })
@@ -96,6 +96,6 @@ export class VolumeService {
     }
 
     VerifyVolumeProgress(volumeId: number, accountId: number, bookId: number) {
-        this.GetVolumeProgress(volumeId, accountId).subscribe((response: Volume) => {})
+        this.GetVolumeProgress(volumeId, accountId, bookId).subscribe((response: Volume) => {})
       }
 }
