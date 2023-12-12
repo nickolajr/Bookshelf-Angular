@@ -143,6 +143,7 @@ deleteBook(bookId:number){
   }
   this.service.deleteBookFromLibrary(parseInt(accountId),bookId).subscribe(() => {
     console.log('Book deleted');
+    window.location.href = '/library';
   });
 }
 
