@@ -77,14 +77,14 @@
                                             <!-- Dropdown -->
                                             <div *ngIf="volume.showdetails">
                                                 <p class="volume-header">Statistics</p>
-                                                <!-- <p>Pages read: {{volume.pagesRead}}</p> -->
+                                                <p>Pages read: {{GetPagesRead(volume.volumeId)}}</p>
                                                 <p>Total pages: {{volume.totalPages}}</p>
                                                 <p>{{volume.volumeId}}</p>
 
                                                 <!-- Update pages read -->
                                                 <div class="update-pages">
-                                                    <input type="number">
-                                                    <!-- <button (click)="UpdateVolume(volume)">Update</button><br> -->
+                                                    <label>Pages Read</label><input placeholder={{GetPagesRead(volume.volumeId)}} type="number" (change)="PagesRead($event)"><br>
+                                                    <button (click)="UpdatePagesRead(volume.volumeId)">Update</button><br>
                                                 </div>
                                             </div>                 
                                         </div>

@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Book } from 'src/app/models/Book';
 import { BookProgress } from 'src/app/models/BookProgress';
+import { VolProgress } from 'src/app/models/VolProgress';
 import { Volume } from 'src/app/models/Volume';
 import { BookService } from 'src/app/services/book.service';
 import { ErrorResponse, VolumeService } from 'src/app/services/volume.service';
@@ -29,6 +30,9 @@ public booklist:Book[]=[];
 public Library: BookList[] = [];
 public bookVolumes: Volume[] = [];
 
+// VolumeProgress map
+public volumeProgressMap: Map<number, VolProgress> = new Map<number, VolProgress>();
+
 public showModal: boolean = false;
 
 toggleDetails(book:Book) {
@@ -51,6 +55,7 @@ toggleVolume(volume: Volume) {
 } 
 
 title:string="";
+pagesRead:number=0;
 
 //it has a DI on the parameter
 //this line tells us that we have a prop called service- its a design pattern
@@ -66,7 +71,9 @@ Title(event:any){
   console.log(this.title);
 }
 
-
+PagesRead(event: any) {
+  this.pagesRead = parseInt(event.target.value);
+}
 
 // Book stuff
 GetByTitle(){
@@ -121,6 +128,12 @@ GetBookVolumes(bookId: number) {
     // Verify volume progress
     this.bookVolumes.forEach((volume: Volume) => {
       this.volumeService.VerifyVolumeProgress(volume.volumeId, parseInt(sessionStorage.getItem('accountId') as string), bookId);
+
+      // Get volume progress
+      this.volumeService.GetVolumeProgress(volume.volumeId, parseInt(sessionStorage.getItem('accountId') as string)).subscribe((response: VolProgress) => {
+        console.log({response});
+        this.volumeProgressMap.set(response.volId, response);
+      });
     });
   });
 }
@@ -149,12 +162,19 @@ deleteBook(bookId:number){
 }
 
 
+GetPagesRead(volumeId: number): number {
+  const progress = this.volumeProgressMap.get(volumeId);
+  if (!progress) return 0;
+  return progress.pagesRead;
+}
 
-
-CreateVolumeProgress(volumeId: number, accountId: number, bookId: number) {
-  this.volumeService.CreateVolumeProgress(volumeId, accountId, bookId).subscribe((response: any) => {
+UpdatePagesRead(volumeId: number) {
+  const progress = this.volumeProgressMap.get(volumeId);
+  console.log({progress});
+  if (!progress) return;
+  progress.pagesRead = this.pagesRead;
+  this.volumeService.UpdatePagesRead(progress).subscribe((response: any) => {
     console.log(response);
   });
-
 }
 }

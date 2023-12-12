@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../enviroment/enviroment';
 import { Observable, catchError } from 'rxjs';
 import { Volume } from '../models/Volume';
+import { VolProgress } from '../models/VolProgress';
 
 
 export interface ErrorResponse {
@@ -45,7 +46,7 @@ export class VolumeService {
         return data;
     }
 
-    GetVolumeProgress(volumeId: number, accountId: number, bookId?: number): Observable<Volume> {
+    GetVolumeProgress(volumeId: number, accountId: number, bookId?: number): Observable<VolProgress> {
         let body = JSON.stringify({
             volumeId: volumeId,
             accountId: accountId
@@ -53,10 +54,10 @@ export class VolumeService {
 
         let headers = { 'content-type': 'application/json' }
 
-        let data = new Observable<Volume>();
+        let data = new Observable<VolProgress>();
 
 
-        data = this.http.get<Volume>(`${this.apiUrl}GetVolProgress?accountId=${accountId}&volId=${volumeId}`).pipe(
+        data = this.http.get<VolProgress>(`${this.apiUrl}GetVolProgress?accountId=${accountId}&volId=${volumeId}`).pipe(
             (response) => {
                 console.log(response);
                 return response;
@@ -65,15 +66,13 @@ export class VolumeService {
             catchError((error) => {
                 console.log({GetError: error});
 
+                if (!bookId) return new Observable<VolProgress>();
                 if (error.status == 404) {
                     console.log('Volume progress not found, creating new progress');
-                    this.CreateVolumeProgress(volumeId, accountId, bookId as number).subscribe((response) => {
-                        console.log({CreateResponse: response});
-                        return response;
-                    });
+                    this.CreateVolumeProgress(volumeId, accountId, bookId as number).subscribe((response) => {});
                 }
                 
-                return new Observable<Volume>();
+                return new Observable<VolProgress>();
             })        
         ); 
 
@@ -96,6 +95,23 @@ export class VolumeService {
     }
 
     VerifyVolumeProgress(volumeId: number, accountId: number, bookId: number) {
-        this.GetVolumeProgress(volumeId, accountId, bookId).subscribe((response: Volume) => {})
+        this.GetVolumeProgress(volumeId, accountId, bookId).subscribe((response: VolProgress) => {})
       }
+
+
+    UpdatePagesRead(progress: VolProgress) {
+        console.log({UpdatePagesRead: progress})
+        let body = JSON.stringify({
+            bookId: progress.bookId,
+            pagesRead: progress.pagesRead,
+            volId: progress.volId,
+        })
+
+        console.log({body})
+
+        let headers = { 'content-type': 'application/json' }
+
+        let data = this.http.post(`${this.apiUrl}UpdPagesRead`, body, { 'headers': headers });
+        return data;
+    }
 }

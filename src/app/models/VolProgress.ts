@@ -1,8 +1,8 @@
 
 export interface VolProgress {
-    Id: number;
+    id: number;
     volId: number;
-    BookId: number;
-    AccountId: number;
-    volumesRead: number;
+    bookId: number;
+    accountId: number;
+    pagesRead: number;
 }
