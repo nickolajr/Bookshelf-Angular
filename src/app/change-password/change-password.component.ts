@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AccountService } from '../services/account.service';
 import { environment } from '../enviroment/enviroment';
 
+
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',

@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../enviroment/enviroment';
 import { Observable } from 'rxjs';
 import { Account } from '../models/Account';
-
+import { of } from 'rxjs';
+import { throwError } from 'rxjs';
 // interface Acc {
 //   id: number;
 //   name: string;
@@ -68,4 +69,20 @@ export class AccountService {
     let body = { NewUsername: newUsername };
     return this.http.put<any>(`${this.apiUrl}ChangeUsername?accountId=${accountId}`, body, { headers: headers });
   }
+}
+
+
+export class MockAccountService {
+  changePassword(accountId: number, newPassword: string) {
+    return of(null); // Simulate a successful API call
+  }
+
+  changeEmail(accountId: number, newEmail: string) {
+    return of(null); 
+  }
+
+  changeUsername(accountId: number, newUsername: string) {
+    return of(null); 
+  }
+
 }
