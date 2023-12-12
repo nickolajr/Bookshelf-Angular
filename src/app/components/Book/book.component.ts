@@ -91,7 +91,7 @@ AddBook(book: Book){
   
   let id: number = Number(accountId);
   this.service.AddBook(book, id).subscribe((response: ApiResponse) => {
-    window.location.href = '/library';
+    window.location.reload();
   });
   
 }
@@ -143,7 +143,8 @@ deleteBook(bookId:number){
   }
   this.service.deleteBookFromLibrary(parseInt(accountId),bookId).subscribe(() => {
     console.log('Book deleted');
-    window.location.href = '/library';
+    window.location.reload();
+    
   });
 }
 
