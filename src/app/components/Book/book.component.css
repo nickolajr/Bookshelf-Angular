@@ -83,3 +83,40 @@ button.book-cover {
   font-weight: bold;
   color: #2e79eb;
 } 
+
+.update-pages {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: #2e79eb;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+
+  /* Width */
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Border */
+  border-radius: 5px;
+}
+
+.update-pages button {
+  margin-top: .2rem;
+  background-color: #3a547a;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+
+  /* Width */
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Border */
+  border-radius: 5px;
+}

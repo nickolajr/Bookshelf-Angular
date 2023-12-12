@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { environment } from './enviroment/enviroment';
 
 //this file is devided in 3 parts
 //1. import statements "getting code from other files"
@@ -16,6 +17,13 @@ import { FormControl } from '@angular/forms';
 export class AppComponent {
 
   title = 'superheroes001';
+
+  ngOnInit() {
+    // Check session storage to see if user is logged in
+    if (sessionStorage.getItem('accountId')) {
+      environment.isLoggedIn = true;
+    }
+  }
 
 }
 

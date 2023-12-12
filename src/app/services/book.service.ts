@@ -30,29 +30,23 @@ export class BookService {
   
 
   GetByTitle(title: string): Observable<ApiResponse> {
-    console.log("getbytitle");
     const headers = { 'content-type': 'application/json'} 
     const body=JSON.stringify(title);
-    console.log(body);
     let data = this.http.post<ApiResponse>(this.apiUrl + "GetBookByTitle", body,{'headers':headers});
     data.subscribe(data => {
-      console.log(data);
       
     }, error => {console.log(error);});
     return data;
   }
   GetBookList(accountId: string): Observable<BookListResponse> {
-    console.log("getbooklist");
     const headers = { 'content-type': 'application/json'} 
     const body = JSON.stringify({ id: accountId });
-    console.log(body);
     let data = this.http.post<BookListResponse>(this.apiUrl + "GetBookList", body,{'headers':headers});
     return data;
   }
 
 
   AddBook(book: Book, accountId: number): Observable<ApiResponse> {
-    console.log("addbook");
     const headers = { 'content-type': 'application/json'} 
 
     const newBook = {
@@ -66,7 +60,6 @@ export class BookService {
     }
 
     const body = JSON.stringify({ AccountId: accountId, book: newBook });
-    console.log(body);
     let data = this.http.post<ApiResponse>(this.apiUrl + "DbAddBook", body,{'headers':headers});
     return data;
     

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { environment } from 'src/app/enviroment/enviroment';
 import { Book } from 'src/app/models/Book';
 import { BookProgress } from 'src/app/models/BookProgress';
 import { VolProgress } from 'src/app/models/VolProgress';
@@ -24,6 +25,8 @@ interface BookList {
   styleUrls: ['./book.component.css']
 })
 export class BookComponent {
+
+  isLoggedIn: boolean = environment.isLoggedIn;
 
 public booklist:Book[]=[];
 
@@ -56,6 +59,7 @@ toggleVolume(volume: Volume) {
 
 title:string="";
 pagesRead:number=0;
+totalPages:number=0;
 
 //it has a DI on the parameter
 //this line tells us that we have a prop called service- its a design pattern
@@ -74,12 +78,14 @@ Title(event:any){
 PagesRead(event: any) {
   this.pagesRead = parseInt(event.target.value);
 }
+TotalPages(event: any) {
+  this.totalPages = parseInt(event.target.value);
+}
+
 
 // Book stuff
 GetByTitle(){
-  console.log("component");
   this.service.GetByTitle(this.title).subscribe((response: ApiResponse) => {
-    console.log(response);
     const book = response.data.Media;
     this.booklist.push(book);
     console.log(this.booklist);
@@ -92,7 +98,6 @@ AddBook(book: Book){
   const accountId = sessionStorage.getItem('accountId');
   if (!accountId) {
     console.log('No accountId found in session storage');
-    console.log(accountId);
     return;
   }
   
@@ -111,7 +116,6 @@ GetBookList(){
   }
 
   this.service.GetBookList(accountId).subscribe((response: any) => {
-    console.log(response);
     this.booklist = [];
     this.Library = response;
     console.log(this.booklist);
@@ -122,7 +126,6 @@ GetBookList(){
 // Volume stuff
 GetBookVolumes(bookId: number) {
   this.volumeService.GetBookVolumes(bookId).subscribe((response: any) => {
-    console.log(response);
     this.bookVolumes = response;
     
     // Verify volume progress
@@ -131,7 +134,6 @@ GetBookVolumes(bookId: number) {
 
       // Get volume progress
       this.volumeService.GetVolumeProgress(volume.volumeId, parseInt(sessionStorage.getItem('accountId') as string)).subscribe((response: VolProgress) => {
-        console.log({response});
         this.volumeProgressMap.set(response.volId, response);
       });
     });
@@ -151,7 +153,6 @@ deleteBook(bookId:number){
   const accountId = sessionStorage.getItem('accountId');
   if (!accountId) {
     console.log('No accountId found in session storage');
-    console.log(accountId);
     return;
   }
   this.service.deleteBookFromLibrary(parseInt(accountId),bookId).subscribe(() => {
@@ -170,11 +171,18 @@ GetPagesRead(volumeId: number): number {
 
 UpdatePagesRead(volumeId: number) {
   const progress = this.volumeProgressMap.get(volumeId);
-  console.log({progress});
   if (!progress) return;
   progress.pagesRead = this.pagesRead;
   this.volumeService.UpdatePagesRead(progress).subscribe((response: any) => {
-    console.log(response);
+    window.location.reload();
+  });
+}
+
+UpdateTotalPages(volumeId: number) {
+  const progress = this.volumeProgressMap.get(volumeId);
+  if (!progress) return;;
+  this.volumeService.UpdateTotalPages(progress, this.totalPages).subscribe((response: any) => {
+    window.location.reload();
   });
 }
 }

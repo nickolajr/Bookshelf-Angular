@@ -24,12 +24,6 @@ export class VolumeService {
     constructor(private http: HttpClient) { }
 
     GetBookVolumes(bookId: number) {
-        let body = JSON.stringify({
-            bookId: bookId
-        })
-
-        let headers = { 'content-type': 'application/json' }
-
         let data = this.http.get<Volume[]>(`${this.apiUrl}GetBookVol?BookId=${bookId}`);
         return data;
     }
@@ -47,13 +41,6 @@ export class VolumeService {
     }
 
     GetVolumeProgress(volumeId: number, accountId: number, bookId?: number): Observable<VolProgress> {
-        let body = JSON.stringify({
-            volumeId: volumeId,
-            accountId: accountId
-        })
-
-        let headers = { 'content-type': 'application/json' }
-
         let data = new Observable<VolProgress>();
 
 
@@ -100,7 +87,6 @@ export class VolumeService {
 
 
     UpdatePagesRead(progress: VolProgress) {
-        console.log({UpdatePagesRead: progress})
         let body = JSON.stringify({
             bookId: progress.bookId,
             pagesRead: progress.pagesRead,
@@ -114,5 +100,19 @@ export class VolumeService {
 
         let data = this.http.post(`${this.apiUrl}UpdPagesRead`, body, { 'headers': headers });
         return data;
+    }
+
+    UpdateTotalPages(progress: VolProgress, totalPages: number) {
+        let body = JSON.stringify({
+            bookId: progress.bookId,
+            totalPages: totalPages,
+            volId: progress.volId,
+        })
+
+        let headers = { 'content-type': 'application/json' }
+
+        let data = this.http.put(`${this.apiUrl}UpdTotalPages?bookId=${progress.bookId}&totalPages=${totalPages}&volId=${progress.volId}`, {});
+        return data;
+        
     }
 }

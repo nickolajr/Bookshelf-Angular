@@ -44,7 +44,10 @@
     <!-- Library -->
     <div>
         <h1>Library</h1>
-        <table class="center-div">
+        <div *ngIf="!isLoggedIn">
+            <h2>Please log in to view your library</h2>
+        </div>
+        <table *ngIf="isLoggedIn" class="center-div">
             <tbody class="center-div">
                 <div class="book-list" *ngIf="Library.length >0">
                     <div *ngFor="let lib of Library">
@@ -86,6 +89,13 @@
                                                     <label>Pages Read</label><input placeholder={{GetPagesRead(volume.volumeId)}} type="number" (change)="PagesRead($event)"><br>
                                                     <button (click)="UpdatePagesRead(volume.volumeId)">Update</button><br>
                                                 </div>
+
+                                                <!-- Update total pages -->
+                                                <div class="update-pages">
+                                                    <label>Total Pages</label><input placeholder={{volume.totalPages}} type="number" (change)="TotalPages($event)"><br>
+                                                    <button (click)="UpdateTotalPages(volume.volumeId)">Update</button><br>
+                                                </div>
+
                                             </div>                 
                                         </div>
                                     </div>
