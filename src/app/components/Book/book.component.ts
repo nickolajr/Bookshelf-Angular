@@ -43,7 +43,7 @@ toggleDetails(book:Book) {
 closeDetails(book: Book) {
   this.showModal = false;
   this.toggleDetails(book);
-  window.location.href = '/library';
+  
 }
 
 toggleVolume(volume: Volume) {
@@ -86,12 +86,12 @@ AddBook(book: Book){
   if (!accountId) {
     console.log('No accountId found in session storage');
     console.log(accountId);
-    
     return;
   }
   
   let id: number = Number(accountId);
   this.service.AddBook(book, id).subscribe((response: ApiResponse) => {
+    window.location.href = '/library';
   });
   
 }
