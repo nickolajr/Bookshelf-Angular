@@ -69,9 +69,11 @@ export class BookService {
     console.log(body);
     let data = this.http.post<ApiResponse>(this.apiUrl + "DbAddBook", body,{'headers':headers});
     return data;
+    
   }
   deleteBookFromLibrary(accountId: number, bookId: number) {
     return this.http.delete(`${this.apiUrl}DelBook?accountId=${accountId}&bookId=${bookId}`);
+    
   }
   
 
