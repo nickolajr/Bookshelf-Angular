@@ -105,6 +105,7 @@ export class VolumeService {
             bookId: progress.bookId,
             pagesRead: progress.pagesRead,
             volId: progress.volId,
+            accountId: progress.accountId
         })
 
         console.log({body})
