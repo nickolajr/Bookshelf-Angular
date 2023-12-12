@@ -35,7 +35,18 @@ button.book-cover {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgba(85, 85, 85,0.6);
 
+  /* Max height to enable scrolling */
+  max-height: 75%;
   border-radius: 5px;
+
+  /* Hide scrollbar */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar */
+.modal::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 .modal-content {

@@ -145,7 +145,7 @@ CreateBookVolume(bookId: number) {
   if(volumeAmount < 0 || volumeAmount == null) return;
   let volNumber = volumeAmount + 1;
   this.volumeService.CreateBookVolume(bookId, volNumber).subscribe((response: any) => {
-    console.log(response);
+    window.location.reload();
   });
   
 }
