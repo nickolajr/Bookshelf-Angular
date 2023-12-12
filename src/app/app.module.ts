@@ -27,6 +27,7 @@ import { Location } from '@angular/common';
     ChangeUsernameComponent,
     ToolbarComponent,
     RegisterComponent,
+    
   ],
   imports: [
     BrowserModule,
