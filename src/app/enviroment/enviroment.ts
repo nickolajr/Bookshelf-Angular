@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    apiUrl : 'https://localhost:7227/api/',
+    apiUrl : 'https://api.aesirdev.tech/api/',
     isLoggedIn: false,
 }
