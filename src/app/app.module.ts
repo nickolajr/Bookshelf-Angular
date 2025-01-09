@@ -17,6 +17,7 @@ import { Location } from '@angular/common';
 import { ForumCreateComponent } from './forum/forum-create/forum-create.component';
 import { ForumPageComponent } from './forum/forum-page/forum-page.component';
 import { ForumPostComponent } from './forum/forum-post/forum-post.component';
+import { PopularBooksComponent } from './popular-books/popular-books.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,12 +33,13 @@ import { ForumPostComponent } from './forum/forum-post/forum-post.component';
     ForumPageComponent,
     ForumPostComponent,
     ForumCreateComponent,
+    PopularBooksComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule, // Add FormsModule to the imports array
+    FormsModule,
     HttpClientModule
   ],
   providers: [Location],

@@ -1,0 +1,29 @@
+<div class="center-div">
+  <h1>Popular Books</h1>
+
+  <div class="book-list" *ngIf="popularBooks.length > 0">
+    <div *ngFor="let book of popularBooks">
+      <button (click)="toggleDetails(book)">
+        <img *ngIf="book.coverImage?.large" [src]="book.coverImage.large" alt="Book cover">
+        <div>
+         <td *ngIf="book.title?.english">{{book.title.english}}</td>
+        </div>
+      </button>
+
+      <!-- Modal -->
+      <div class="modal" *ngIf="book.showdetails && activeBookId === book.id && modalOpen">
+        <div class="modal-content">
+          <span class="close" (click)="closeDetails(book)">×</span>
+          <div class="modal-header">
+            <button (click)="AddBook(book)">Add To Library</button>
+            <h2>{{book.title?.english}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="popularBooks.length === 0">
+    <h2>No popular books found</h2>
+  </div>
+</div>

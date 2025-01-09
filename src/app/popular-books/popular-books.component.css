@@ -1,0 +1,42 @@
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  align-items: flex-start; /* Change from center to flex-start */
+  justify-content: flex-start; /* Change from center to flex-start */
+  margin: 0 auto;
+  gap: 20px; /* Space between items */
+}
+
+.book-list > div {
+  padding: 10px;
+  border: 1px solid #ddd;
+  width: calc(33.33% - 20px); /* Makes each item take up 1/3 of the container width */
+  box-sizing: border-box;
+  flex: 0 0 auto; /* Prevent items from expanding */
+}
+
+.book-list > div h3 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.book-list > div p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Responsive styles for tablet */
+@media (max-width: 768px) {
+  .book-list > div {
+    width: calc(50% - 20px); /* Two items per row on tablets */
+  }
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 480px) {
+  .book-list > div {
+    width: 100%; /* One item per row on mobile */
+  }
+}
