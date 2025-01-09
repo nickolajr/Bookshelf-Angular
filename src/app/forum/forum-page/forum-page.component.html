@@ -1,0 +1,11 @@
+<div class="forum-container">
+  <app-forum-create></app-forum-create>
+  <h2>Forum Posts</h2>
+  <div *ngIf="loading" class="loading-indicator">Loading posts...</div>
+  <div *ngIf="!loading" class="post-list">
+    <app-forum-post *ngFor="let post of posts" [post]="post"></app-forum-post>
+  </div>
+  <div *ngIf="posts.length == 0 && !loading" class="no-posts">
+      <p>There are no posts yet!</p>
+  </div>
+</div>

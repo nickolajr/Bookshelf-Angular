@@ -14,7 +14,9 @@ import { ChangeUsernameComponent } from './change-username/change-username.compo
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { Location } from '@angular/common';
-
+import { ForumCreateComponent } from './forum/forum-create/forum-create.component';
+import { ForumPageComponent } from './forum/forum-page/forum-page.component';
+import { ForumPostComponent } from './forum/forum-post/forum-post.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,9 @@ import { Location } from '@angular/common';
     ChangeUsernameComponent,
     ToolbarComponent,
     RegisterComponent,
-    
+    ForumPageComponent,
+    ForumPostComponent,
+    ForumCreateComponent,
   ],
   imports: [
     BrowserModule,

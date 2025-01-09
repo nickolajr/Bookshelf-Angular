@@ -9,6 +9,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangeUsernameComponent } from './change-username/change-username.component';
+import { ForumPageComponent } from './forum/forum-page/forum-page.component';
 
 
 const routes: Routes = [
@@ -16,10 +17,12 @@ const routes: Routes = [
   { path: 'library', component: BookComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'register', component: RegisterComponent},
+  {path: 'forum', component: ForumPageComponent},
   { path: 'settings', component: SettingsComponent, children: [
     { path: 'change-password', component: ChangePasswordComponent },
     { path: 'change-email', component: ChangeEmailComponent },
     { path: 'change-username', component: ChangeUsernameComponent },
+   
   ] },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
