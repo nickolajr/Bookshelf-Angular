@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AccountService } from '../services/account.service';
-import { Account } from '../models/Account';
 import { Router } from '@angular/router';
+import { AccountService } from 'src/app/services/account.service';
+import { Account } from '../models/Account';
 
 @Component({
   selector: 'app-profile',
@@ -9,13 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  acc = {
-    email: '',
-    isAdmin: false,
-    name: '',
-    password: '',
-    userName: ''
-  }
+  acc!: Account;
   isopen: boolean = false;
   constructor(private service:AccountService, private router: Router) {}
 

@@ -3,86 +3,49 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../enviroment/enviroment';
 import { Observable } from 'rxjs';
 import { Account } from '../models/Account';
-import { of } from 'rxjs';
-import { throwError } from 'rxjs';
-// interface Acc {
-//   id: number;
-//   name: string;
-//   username: string;
-//   email: string;
-//   password: string;
-//   isAdmin: boolean;
-// }
+import { of, throwError } from 'rxjs';
 
 interface ApiResponse {
-  email: string;
-  isAdmin: boolean;
-  name: string;
-  password: string;
-  userName: string;
-};
-//decorator
+     email: string;
+     name: string;
+   username: string;
+}
+interface registerResponse {
+    token: string
+}
+ interface CreateAccountRequest {
+     email: string;
+    password: string
+   }
+
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AccountService {
 
-  private readonly apiUrl = environment.apiUrl + "Accounts/";
-  
-  constructor(private http: HttpClient) { }
+    private readonly apiUrl = environment.apiUrl + "Accounts/";
 
-  register(accountData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}Create`, accountData);
+    constructor(private http: HttpClient) { }
+
+     register(accountData: CreateAccountRequest): Observable<any> {
+       return this.http.post<any>(`${this.apiUrl}create`, accountData);
+   }
+
+   GetAccount(id: number): Observable<Account> {
+        return this.http.post<Account>(environment.apiUrl +`Auth/register`, { id });
+    }
+   DelAcc(id: number): Observable<any> {
+     return this.http.delete<any>(`${this.apiUrl}DelAcc?id=${id}`);
   }
 
-
-  GetAccount(id: number): Observable<ApiResponse> {
-    let body = JSON.stringify({
-      id: id
-    })
-
-    let headers = { 'content-type': 'application/json' }
-
-    let data = this.http.post<ApiResponse>(this.apiUrl + "GetAccInfo", body, { 'headers': headers } );
-    return data;
-
-  }
-  DelAcc(id: number): Observable<ApiResponse> {
-    let headers = { 'content-type': 'application/json' };
-
-    let data = this.http.delete<ApiResponse>(`${this.apiUrl}DelAcc?id=${id}`, { headers: headers });
-    return data;
-  }
   changeEmail(accountId: number, newEmail: string): Observable<any> {
-    let headers = { 'content-type': 'application/json' };
-    let body = { newEmail: newEmail };
-    return this.http.put<any>(`${this.apiUrl}ChangeEmail?accountId=${accountId}`, body, { headers: headers });
+        return this.http.put<any>(`${this.apiUrl}ChangeEmail?accountId=${accountId}`, { newEmail });
   }
   changePassword(accountId: number, newPassword: string): Observable<any> {
-    let headers = { 'content-type': 'application/json' };
-    let body = { newPassword: newPassword };
-    return this.http.put<any>(`${this.apiUrl}ChangePassword?accountId=${accountId}`, body, { headers: headers });
+     return this.http.put<any>(`${this.apiUrl}ChangePassword?accountId=${accountId}`, { newPassword });
   }
 
-  changeUsername(accountId: number, newUsername: string): Observable<any> {
-    let headers = { 'content-type': 'application/json' };
-    let body = { NewUsername: newUsername };
-    return this.http.put<any>(`${this.apiUrl}ChangeUsername?accountId=${accountId}`, body, { headers: headers });
-  }
-}
-
-
-export class MockAccountService {
-  changePassword(accountId: number, newPassword: string) {
-    return of(null); // Simulate a successful API call
-  }
-
-  changeEmail(accountId: number, newEmail: string) {
-    return of(null); 
-  }
-
-  changeUsername(accountId: number, newUsername: string) {
-    return of(null); 
-  }
-
+   changeUsername(accountId: number, newUsername: string): Observable<any> {
+     return this.http.put<any>(`${this.apiUrl}ChangeUsername?accountId=${accountId}`, { NewUsername: newUsername });
+   }
 }

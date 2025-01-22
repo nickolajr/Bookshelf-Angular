@@ -1,14 +1,23 @@
+
 .forum-container {
     padding: 20px;
-    max-width: 800px; /* Max width */
+    max-width: 800px;
     margin: 0 auto;
+    background-color: black; 
+    color: white;
 }
 
 .post-list {
-  display: flex; /* Use flexbox to wrap posts */
-  flex-wrap: wrap; /* Wrap to next line if it overflow */
-  gap: 20px; /* Spacing between posts*/
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: space-evenly;
+}
+
+
+.app-forum-post {
+    box-sizing: border-box; 
+    color: white; 
 }
 
 .loading-indicator {

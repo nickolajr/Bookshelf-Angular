@@ -1,7 +1,8 @@
-
 <div class="login-container">
-    <h2>Login</h2>
-    <input [(ngModel)]="UserName" placeholder="Username" />
-    <input [(ngModel)]="Password" placeholder="Password" type="password" />
-    <button (click)="login()">Login</button>
-  </div>
+  <h2>Login</h2>
+     <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <input type="text" formControlName="UserName" placeholder="Username" />
+          <input type="password" formControlName="Password" placeholder="Password" />
+          <button type="submit" [disabled]="loginForm.invalid">Login</button>
+      </form>
+</div>

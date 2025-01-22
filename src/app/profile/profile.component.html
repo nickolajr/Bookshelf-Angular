@@ -1,17 +1,14 @@
-<p>profile works!</p>
-
-<!-- Account information -->
-<div>
-    <h2>Account Information</h2>
-    <p>Username: {{acc.userName}}</p>
-    <p>Name: {{acc.name}}</p>
-    <p>Email: {{acc.email}}</p>
-</div>
-<button (click)="toggle()">Delete Account</button>
-<div class="modal" *ngIf="isopen">
-    <div class="center-div">
-        <span class="close" (click)="toggle()">&times;</span>
-        <h2>you sure you wanna delete you Account</h2>
-        <button (click)="DelAcc()">Delete Account</button>
-    </div>
+<div class="profile-container">
+    <h2>Profile</h2>
+    <div *ngIf="acc">
+        <p>Username: {{acc.userName}}</p>
+        <p>Email: {{acc.email}}</p>
+        <button (click)="toggle()">Settings</button>
+        <div *ngIf="isopen">
+           <button (click)="DelAcc()">Delete Account</button>
+        </div>
+     </div>
+    <div *ngIf="!acc">
+        <p>Could not load profile</p>
+     </div>
 </div>

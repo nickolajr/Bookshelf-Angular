@@ -1,12 +1,6 @@
-import { BookProgress } from './BookProgress';
-export class Account{
-    Id:number=0;
-    Name:string="";
-    UserName:string="";
-    Email:string="";
-    Password:string="";
-    IsAdmin:boolean=false;
-    Books:BookProgress[]=[];
-
- 
+export interface Account{
+    id:number;
+   userName:string;
+  email:string;
+  password?:string
 }
