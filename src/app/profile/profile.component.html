@@ -1,14 +1,16 @@
 <div class="profile-container">
-    <h2>Profile</h2>
-    <div *ngIf="acc">
-        <p>Username: {{acc.userName}}</p>
-        <p>Email: {{acc.email}}</p>
-        <button (click)="toggle()">Settings</button>
-        <div *ngIf="isopen">
-           <button (click)="DelAcc()">Delete Account</button>
-        </div>
+   <h2>Profile</h2>
+   <div *ngIf="account">
+     <p><strong>ID:</strong> {{ account.id }}</p> <!-- Display account ID -->
+     <p><strong>Username:</strong> {{ account.userName }}</p>
+     <p><strong>Email:</strong> {{ account.email }}</p>
+     <button (click)="toggle()">Settings</button>
+     <div *ngIf="isopen" class="settings">
+       <button class="delete-btn" (click)="DelAcc()">Delete Account</button>
      </div>
-    <div *ngIf="!acc">
-        <p>Could not load profile</p>
-     </div>
-</div>
+   </div>
+   <div *ngIf="!account">
+     <p>Could not load profile.</p>
+   </div>
+ </div>
+ 

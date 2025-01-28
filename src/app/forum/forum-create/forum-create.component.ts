@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ForumService, ForumPost } from 'src/app/services/forum.service';
+import { Account } from 'src/app/models/Account';
+import { Subscription, take  } from 'rxjs';
+import { LoginService } from 'src/app/services/login.service';
+
 
 @Component({
   selector: 'app-forum-create',
@@ -10,19 +14,34 @@ import { ForumService, ForumPost } from 'src/app/services/forum.service';
 export class ForumCreateComponent {
   postForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private forumService: ForumService) {
+  constructor(private fb: FormBuilder, private forumService: ForumService,private loginService: LoginService) {
     this.postForm = this.fb.group({
       title: ['', Validators.required],
       content: ['', Validators.required]
+      
     });
+    
   }
+  public account: Account | null = null;
+  private accountSubscription: Subscription | undefined;
+  public isLoggedIn: boolean = false;
+
 
   onSubmit(): void {
+    this.accountSubscription = this.loginService.currentUser$
+      .pipe(take(1))
+      .subscribe({
+        next: (account) => {
+          this.account = account;
+          this.isLoggedIn = this.loginService.convertToBoolean(this.account?.isLoggedin);
+        },
+        error: (error) => {
+          console.error('Error fetching user account:', error);
+          
+        },
+      });
     if (this.postForm.valid) {
-      
-      const accountId = sessionStorage.getItem('accountId');
-      
-      if (!accountId) {
+      if (!this.account?.id) {
         
         console.error('Account ID not found in sessionStorage');
         return;
@@ -32,7 +51,7 @@ export class ForumCreateComponent {
         id: 0,
         title: this.postForm.value.title,
         content: this.postForm.value.content,
-        accountId: Number(accountId)  
+        accountId: Number(this.account.id)  
       };
       console.log(newPost);
       this.forumService.createPost(newPost).subscribe((post) => {

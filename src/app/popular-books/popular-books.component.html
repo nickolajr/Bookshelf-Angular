@@ -6,17 +6,17 @@
       <button (click)="toggleDetails(book)">
         <img *ngIf="book.coverImage?.large" [src]="book.coverImage.large" alt="Book cover">
         <div>
-         <td *ngIf="book.title?.english">{{book.title.english}}</td>
+          <span *ngIf="book.title?.english">{{ book.title.english }}</span>
         </div>
       </button>
 
       <!-- Modal -->
-      <div class="modal" *ngIf="book.showdetails && activeBookId === book.id && modalOpen">
+      <div class="modal" *ngIf="modalOpen && activeBookId === book.id">
         <div class="modal-content">
-          <span class="close" (click)="closeDetails(book)">×</span>
+          <span class="close" (click)="closeDetails()">×</span>
           <div class="modal-header">
-            <button (click)="AddBook(book)">Add To Library</button>
-            <h2>{{book.title?.english}}</h2>
+            <button (click)="addBook(book)">Add To Library</button>
+            <h2>{{ book.title?.english }}</h2>
           </div>
         </div>
       </div>

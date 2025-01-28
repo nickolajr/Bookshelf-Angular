@@ -5,9 +5,9 @@ export class Book{
   title:Title=new Title();
   coverImage:CoverImage=new CoverImage();
   volumes?:number=0;
-  status:string="";
-  format:string="";
-  showdetails:boolean=false;
+  status?:string="";
+  format?:string="";
+  showdetails?:boolean=false;
 }
 class CoverImage{
   large?:string="";
