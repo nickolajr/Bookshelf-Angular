@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewChecked } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subscription, take } from 'rxjs';
 import { environment } from 'src/app/enviroment/enviroment';
@@ -27,8 +27,8 @@ interface BookList {
     templateUrl: './book.component.html',
     styleUrls: ['./book.component.css']
 })
-export class BookComponent implements OnInit, OnDestroy {
-    
+export class BookComponent implements OnInit, OnDestroy, AfterViewChecked {
+
     isLoggedIn: boolean = false;
     public booklist: Book[] = [];
     public Library: BookList[] = [];
@@ -68,27 +68,32 @@ export class BookComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.accountSubscription = this.loginService.currentUser$
-        .pipe(take(1))
-        .subscribe({
-          next: (account) => {
-            this.account = account;
-            this.isLoggedIn = this.convertToBoolean(this.account?.isLoggedin);
-            console.log("isloggedin"+this.account?.isLoggedin)
-            console.log(this.isLoggedIn)
-              if (this.account?.id) {
-                this.GetBookList(this.account.id);
-              }
-          },
-          error: (error) => {
-              console.error('Error fetching user account:', error);
-              // Handle error (e.g., display message)
-          },
-        });
+            .pipe(take(1))
+            .subscribe({
+                next: (account) => {
+                    this.account = account;
+                    this.isLoggedIn = this.convertToBoolean(this.account?.isLoggedin);
+                    console.log("isloggedin" + this.account?.isLoggedin)
+                    console.log(this.isLoggedIn)
+                    if (this.account?.id) {
+                        this.GetBookList(this.account.id);
+                    }
+                },
+                error: (error) => {
+                    console.error('Error fetching user account:', error);
+                    // Handle error (e.g., display message)
+                },
+            });
     }
-      ngOnDestroy(): void {
-          this.accountSubscription?.unsubscribe();
-       }
-    
+
+    ngAfterViewChecked(): void {
+        this.attachVolumeButtonListeners();
+    }
+
+    ngOnDestroy(): void {
+        this.accountSubscription?.unsubscribe();
+    }
+
 
     // label changes
     Title(event: any) {
@@ -117,9 +122,9 @@ export class BookComponent implements OnInit, OnDestroy {
 
     AddBook(book: Book) {
         console.log(`AddBook(${book})`)
-        if(!this.account?.id){
-           console.log('No user logged in')
-           return
+        if (!this.account?.id) {
+            console.log('No user logged in')
+            return
         }
         this.service.AddBook(book, parseInt(this.account.id)).subscribe((response: ApiResponse) => {
             window.location.reload();
@@ -127,8 +132,8 @@ export class BookComponent implements OnInit, OnDestroy {
 
     }
 
-    GetBookList(accountId:string) {
-      console.log(accountId,"listid")
+    GetBookList(accountId: string) {
+        console.log(accountId, "listid")
         this.service.GetBookList(accountId).subscribe((response: any) => {
             this.booklist = [];
             this.Library = response;
@@ -137,13 +142,13 @@ export class BookComponent implements OnInit, OnDestroy {
     }
     private convertToBoolean(value: string | undefined): boolean {
         if (value === "1") {
-          return true;
+            return true;
         } else if (value === "0") {
-          return false;
+            return false;
         }
         throw new Error(`Invalid value: ${value}. Expected "1" or "0".`);
-      }
-      
+    }
+
 
     // Volume stuff
     GetBookVolumes(bookId: number) {
@@ -152,10 +157,10 @@ export class BookComponent implements OnInit, OnDestroy {
 
             // Verify volume progress
             this.bookVolumes.forEach((volume: Volume) => {
-                 if(!this.account?.id){
-                       console.log('No user logged in')
-                        return
-                   }
+                if (!this.account?.id) {
+                    console.log('No user logged in')
+                    return
+                }
                 this.volumeService.VerifyVolumeProgress(volume.volumeId, parseInt(this.account.id), bookId);
 
                 // Get volume progress
@@ -176,10 +181,10 @@ export class BookComponent implements OnInit, OnDestroy {
 
     }
     deleteBook(bookId: number) {
-           if(!this.account?.id){
-               console.log('No user logged in')
-               return;
-            }
+        if (!this.account?.id) {
+            console.log('No user logged in')
+            return;
+        }
         this.service.deleteBookFromLibrary(parseInt(this.account.id), bookId).subscribe(() => {
             console.log('Book deleted');
             window.location.reload();
@@ -197,10 +202,10 @@ export class BookComponent implements OnInit, OnDestroy {
         const progress = this.volumeProgressMap.get(volumeId);
         if (!progress) return;
         progress.pagesRead = this.pagesRead;
-         if(!this.account?.id){
-               console.log('No user logged in')
-               return;
-            }
+        if (!this.account?.id) {
+            console.log('No user logged in')
+            return;
+        }
         this.volumeService.UpdatePagesRead(progress).subscribe((response: any) => {
             window.location.reload();
         });
@@ -209,12 +214,42 @@ export class BookComponent implements OnInit, OnDestroy {
     UpdateTotalPages(volumeId: number) {
         const progress = this.volumeProgressMap.get(volumeId);
         if (!progress) return;
-           if(!this.account?.id){
-                console.log('No user logged in')
-               return
-             }
+        if (!this.account?.id) {
+            console.log('No user logged in')
+            return
+        }
         this.volumeService.UpdateTotalPages(progress, this.totalPages).subscribe((response: any) => {
             window.location.reload();
         });
     }
+
+    attachVolumeButtonListeners() {
+        setTimeout(() => {
+            const volumeElements = document.querySelectorAll('.volume');
+            volumeElements.forEach((volumeElement) => {
+                const volumeId = (volumeElement as HTMLElement).dataset['volumeId']; // Assuming you have a data attribute on the element
+
+                if (!volumeId) {
+                    console.warn("Volume ID not found on volume element.");
+                    return;
+                }
+                const volumeIdNumber = parseInt(volumeId);
+                if (isNaN(volumeIdNumber)) {
+                    console.warn("Invalid Volume ID number.");
+                    return;
+                }
+                const button = volumeElement.querySelector('.volume-button');
+
+                if (!button) {
+                    console.warn("Button not found for volume element with volumeId: " + volumeId);
+                    return;
+                }
+
+                button.addEventListener('click', () => {
+                    volumeElement.classList.toggle('active');
+                });
+            });
+        });
+    }
+
 }

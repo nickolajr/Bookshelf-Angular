@@ -96,3 +96,36 @@
   word-break: break-word; /* Prevent overflowing */
   overflow-wrap: break-word; /* Alternative for word-break */
 }
+/* Enhanced style for the signup button */
+.signup-button {
+  background-color: var(--accent-color);
+  color: var(--button-text-color);
+  padding: 12px 24px;             /* Increased padding for a larger click area */
+  border: 2px solid transparent;  /* A border that can animate if needed */
+  border-radius: 6px;             /* Slightly more rounded corners */
+  cursor: pointer;
+  font-size: 1.1em;               /* Slightly larger text for clarity */
+  font-weight: bold;              /* Emphasize the button text */
+  transition: background-color 0.3s ease, 
+              transform 0.2s ease, 
+              box-shadow 0.3s ease; /* Smooth transitions for interactions */
+  display: inline-block;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.signup-button:hover {
+  background-color: #0056b3;      /* A deeper blue on hover for contrast */
+  transform: scale(1.05);         /* Slightly enlarge on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* A subtle shadow to indicate interactivity */
+}
+
+.signup-button:active {
+  transform: scale(0.98);         /* A brief shrink on click for a pressed effect */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.signup-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Optional: a focus ring for accessibility */
+}

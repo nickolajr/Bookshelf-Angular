@@ -1,108 +1,123 @@
-<div class="center-div">
-  <h1>Book List</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book List and Library</title>
+  <link rel="stylesheet" href="book.component.css" />
+</head>
+<body>
+  <div class="center-div">
+    <h1>Book List</h1>
 
-  <!-- Search -->
-  <div class="search">
-    <label>Enter Title</label><input type="text" (change)="Title($event)"><br>
-    <button (click)="GetByTitle()">Test</button><br>
-    <table class="center-div">
-      <tbody class="center-div">
-        <div class="book-list" *ngIf="booklist.length > 0">
-          <div *ngFor="let book of booklist" class="book-item">
-            <button class="search-result-button" (click)="toggleDetails(book)">
-              <img *ngIf="book.coverImage" [src]="book.coverImage.large" alt="Book cover">
-              <div>
-                <td *ngIf="book.title.english">{{book.title.english}}</td>
-                <td *ngIf="!book.title.english">{{book.title.romaji}}</td>
-              </div>
-            </button>
+    <!-- Search -->
+    <div class="search">
+      <label>Enter Title</label>
+      <input type="text" (change)="Title($event)" /><br />
+      <button (click)="GetByTitle()">Test</button><br />
+      <table class="center-div">
+        <tbody class="center-div">
+          <div class="book-list" *ngIf="booklist.length > 0">
+            <div *ngFor="let book of booklist" class="book-item">
+              <button class="search-result-button" (click)="toggleDetails(book)">
+                <img *ngIf="book.coverImage" [src]="book.coverImage.large" alt="Book cover" />
+                <div>
+                  <td *ngIf="book.title.english">{{ book.title.english }}</td>
+                  <td *ngIf="!book.title.english">{{ book.title.romaji }}</td>
+                </div>
+              </button>
 
-            <!-- Modal -->
-            <div class="modal" *ngIf="book.showdetails">
-              <div class="modal-content">
-                <span class="close" (click)="closeDetails(book)">×</span>
-                <div class="modal-header">
-                  <button (click)="AddBook(book)">Add To Library</button>
-                  <h3 *ngIf="book.title.english">{{book.title.english}}</h3>
-                  <h3 *ngIf="!book.title.english">{{book.title.romaji}}</h3>
+              <!-- Modal -->
+              <div class="modal" *ngIf="book.showdetails">
+                <div class="modal-content">
+                  <span class="close" (click)="closeDetails(book)">×</span>
+                  <div class="modal-header">
+                    <button (click)="AddBook(book)">Add To Library</button>
+                    <h3 *ngIf="book.title.english">{{ book.title.english }}</h3>
+                    <h3 *ngIf="!book.title.english">{{ book.title.romaji }}</h3>
+                  </div>
                 </div>
               </div>
-            </div>              
-          </div>         
-        </div>
-        <div *ngIf="booklist.length === 0">
-          <h2>No books found</h2>
-        </div>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Library -->
-  <div>
-    <h1>Library</h1>
-    <div *ngIf="!isLoggedIn">
-      <h2>Please log in to view your library</h2>
+            </div>
+          </div>
+          <div *ngIf="booklist.length === 0">
+            <h2>No books found</h2>
+          </div>
+        </tbody>
+      </table>
     </div>
-    <table *ngIf="isLoggedIn" class="center-div">
-      <tbody class="center-div">
-        <div class="book-list" *ngIf="Library.length > 0">
-          <div *ngFor="let lib of Library" class="book-item">
-            <button (click)="toggleDetails(lib.book)">
-              <img *ngIf="lib.book.coverImage" [src]="lib.book.coverImage" alt="Book cover">
-              <div>
-                <td>{{lib.book.title}}</td>
-              </div>
-            </button>
 
-            <!-- Modal -->
-            <div class="modal" *ngIf="lib.book.showdetails">
-              <div class="modal-content">
-                <span class="close" (click)="closeDetails(lib.book)">×</span>
-                <div class="modal-header">
-                  <h2>{{lib.book.title}}</h2>
-                  <h2>Volumes read: {{lib.progress.volumesRead}}</h2>
+    <!-- Library -->
+    <div>
+      <h1>Library</h1>
+      <div *ngIf="!isLoggedIn">
+        <h2>Please log in to view your library</h2>
+      </div>
+      <table *ngIf="isLoggedIn" class="center-div">
+        <tbody class="center-div">
+          <div class="book-list" *ngIf="Library.length > 0">
+            <div *ngFor="let lib of Library" class="book-item">
+              <button (click)="toggleDetails(lib.book)">
+                <img *ngIf="lib.book.coverImage" [src]="lib.book.coverImage" alt="Book cover" />
+                <div>
+                  <td>{{ lib.book.title }}</td>
+                </div>
+              </button>
 
-                  <!-- Create Volume -->
-                  <div class="create-volume">
-                    <button class="create-volume-button" (click)="CreateBookVolume(lib.book.id)">Create Volume</button><br>
-                  </div>
+              <!-- Modal -->
+              <div class="modal" *ngIf="lib.book.showdetails">
+                <div class="modal-content">
+                  <span class="close" (click)="closeDetails(lib.book)">×</span>
+                  <div class="modal-header">
+                    <h2>{{ lib.book.title }}</h2>
+                    <h2>Volumes read: {{ lib.progress.volumesRead }}</h2>
 
-                  <!-- List Volumes -->
-                  <div *ngFor="let volume of bookVolumes">
-                    <div class="volume">
-                      <button class="delete-book-button" (click)="toggleVolume(volume)">Volume {{volume.volNumber}}</button>
-                      
-                      <!-- Dropdown -->
-                      <div *ngIf="volume.showdetails">
-                        <p class="volume-header">Statistics</p>
-                        <p>Pages read: {{GetPagesRead(volume.volumeId)}}</p>
-                        <p>Total pages: {{volume.totalPages}}</p>
-
-                        <!-- Update pages read -->
-                        <div class="update-pages">
-                          <label>Pages Read</label><input placeholder={{GetPagesRead(volume.volumeId)}} type="number" (change)="PagesRead($event)"><br>
-                          <button (click)="UpdatePagesRead(volume.volumeId)">Update</button><br>
-                        </div>
-
-                        <!-- Update total pages -->
-                        <div class="update-pages">
-                          <label>Total Pages</label><input placeholder={{volume.totalPages}} type="number" (change)="TotalPages($event)"><br>
-                          <button (click)="UpdateTotalPages(volume.volumeId)">Update</button><br>
-                        </div>
-
-                      </div>                 
+                    <!-- Create Volume -->
+                    <div class="create-volume">
+                      <button class="create-volume-button" (click)="CreateBookVolume(lib.book.id)">Create Volume</button><br />
                     </div>
+
+                    <!-- List Volumes -->
+                    <div *ngFor="let volume of bookVolumes">
+                      <div class="volume">
+                        <button class="delete-book-button" (click)="toggleVolume(volume)">
+                          Volume {{ volume.volNumber }}
+                        </button>
+
+                        <!-- Dropdown -->
+                        <div *ngIf="volume.showdetails">
+                          <p class="volume-header">Statistics</p>
+                          <p>Pages read: {{ GetPagesRead(volume.volumeId) }}</p>
+                          <p>Total pages: {{ volume.totalPages }}</p>
+
+                          <!-- Update pages read -->
+                          <div class="update-pages">
+                            <label>Pages Read</label>
+                            <input placeholder="{{ GetPagesRead(volume.volumeId) }}" type="number" (change)="PagesRead($event)" /><br />
+                            <button (click)="UpdatePagesRead(volume.volumeId)">Update</button><br />
+                          </div>
+
+                          <!-- Update total pages -->
+                          <div class="update-pages">
+                            <label>Total Pages</label>
+                            <input placeholder="{{ volume.totalPages }}" type="number" (change)="TotalPages($event)" /><br />
+                            <button (click)="UpdateTotalPages(volume.volumeId)">Update</button><br />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="delete-book-button" (click)="deleteBook(lib.book.id)">Delete Book</button>
                   </div>
-                  <button class="delete-book-button" (click)="deleteBook(lib.book.id)">Delete Book</button>
                 </div>
               </div>
-            </div>              
-          </div>         
-        </div>
-        <div *ngIf="Library.length === 0">
-          <h2>No books found</h2>
-        </div>
-      </tbody>
-    </table>
+            </div>
+          </div>
+          <div *ngIf="Library.length === 0">
+            <h2>No books found</h2>
+          </div>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+</body>
+</html>

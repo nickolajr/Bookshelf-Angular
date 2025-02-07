@@ -18,8 +18,10 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    position: relative; /* Re-establish relative positioning */
-    z-index: 2; /* Ensure book is above particles */
+    position: relative;
+    /* Re-establish relative positioning */
+    z-index: 2;
+    /* Ensure book is above particles */
   }
   
   /* Styles for the particle container */
@@ -31,7 +33,8 @@
     height: 100%;
     background-color: var(--book-background);
     background-image: linear-gradient(to bottom, var(--book-background), #34495e);
-    z-index: 0; /* Place particles behind content */
+    z-index: 0;
+    /* Place particles behind content */
   }
   
   .book {
@@ -43,7 +46,8 @@
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 5px;
     position: relative;
-    z-index: 3; /* Ensure book is above particles */
+    z-index: 3;
+    /* Ensure book is above particles */
   }
   
   .book:hover {
@@ -89,6 +93,11 @@
   .page-content p {
     color: var(--text-color);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .page-content a {
+    color: var(--accent-color);
+    text-decoration: none;
   }
   
   .form-group {
@@ -161,4 +170,28 @@
     text-orientation: mixed;
     border-radius: 0;
     box-shadow: 0 0 10px rgba(73, 80, 87, 0.3);
+  }
+  
+  /* Style for signup button */
+  .signup-button {
+    background-color: var(--accent-color);
+    color: var(--button-text-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+  
+  .signup-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  .signup-button:active {
+    transform: scale(0.95);
   }
