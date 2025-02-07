@@ -1,26 +1,98 @@
 .forum-post {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-     width: calc(30% - 20px); /* Take 30% width of the container with some spacing */
-     box-sizing: border-box;
-     min-width: 300px;
-     background: linear-gradient(
-      135deg,    /* Angle - slight diagonal */
-      #283870,   /* Start - dark blue */
-      #202A58,   /* Mid 1 - a very dark blue */
-      #212046,  /* Mid 2 - a very dark blue-purple */
-      #32224B     /* End - a deep dark purple */
-     )
-  }
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+  width: calc(30% - 20px); /* Take 30% width of the container with some spacing */
+  box-sizing: border-box;
+  min-width: 300px;
+  background: linear-gradient(
+    135deg,    /* Angle - slight diagonal */
+    #283870,   /* Start - dark blue */
+    #202A58,   /* Mid 1 - a very dark blue */
+    #212046,  /* Mid 2 - a very dark blue-purple */
+    #32224B     /* End - a deep dark purple */
+  );
+}
 
-  .post-content {
+.post-content {
+  margin-bottom: 10px;
+  white-space: pre-line; /* For multiline text */
+  word-break: break-word; /* Prevent long words from overflowing */
+  overflow-wrap: break-word; /* Alternative for word-break */
+}
+
+.post-date {
+  font-size: 0.8em;
+  color: #888;
+}
+
+.read-more {
+  color: #007bff; /* Link color */
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 16, 26, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: linear-gradient(45deg, #0A101A, #181F2A, #2C233A, #3D2A4B);
+    color: white;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    box-sizing: border-box;
+    position: relative; /* This is key for positioning the close button */
+}
+
+.modal-title {
+    font-size: 1.5em;
+    font-weight: bold;
     margin-bottom: 10px;
-    white-space: pre-line; /* For multiline text */
-  }
-  
-  .post-date {
-      font-size: 0.8em;
-      color: #888;
-  }
+    text-align: center;
+}
+
+.modal-close {
+    color: #ddd;
+    position: absolute; /* Absolute positioning relative to .modal-content */
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.modal-close:hover {
+    color: white;
+}
+
+.modal-author {
+    font-style: italic;        
+    margin-bottom: 10px;    
+    color: #bbb;             
+    text-align: center;        
+}
+
+/* Truncation styles */
+.truncated-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  max-height: 4.5em; /* Set a maximum height based on line height */
+  word-break: break-word; /* Prevent overflowing */
+  overflow-wrap: break-word; /* Alternative for word-break */
+}

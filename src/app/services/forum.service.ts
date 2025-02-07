@@ -9,6 +9,7 @@ export interface ForumPost {
   content: string;
   accountId: number;
   replies?: { id: number, content: string }[];
+  author: string; 
 }
 
 export interface PaginatedResponse {

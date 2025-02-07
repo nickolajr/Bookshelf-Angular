@@ -51,7 +51,8 @@ export class ForumCreateComponent {
         id: 0,
         title: this.postForm.value.title,
         content: this.postForm.value.content,
-        accountId: Number(this.account.id)  
+        accountId: Number(this.account.id),  
+        author: String(this.account.userName)
       };
       console.log(newPost);
       this.forumService.createPost(newPost).subscribe((post) => {

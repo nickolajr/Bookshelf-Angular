@@ -1,5 +1,27 @@
 <div class="forum-post">
     <h3>{{ post.title }}</h3>
-    <p class="post-content">{{ post.content }}</p>
-    <!--<p class="post-date">Posted at: {{ post.createdAt | date:'medium' }}</p> -->
+
+    <div *ngIf="isTruncated" class="truncated-text post-content">
+      {{ truncatedContent }}
+    </div>
+
+    <div *ngIf="!isTruncated" class="post-content">
+      {{ truncatedContent }}
+    </div>
+
+    <a class="read-more" (click)="openModal()">Read More</a>
+    <!--<p class="post-date">Posted at: {{ post.createdAt | date:'medium' }}</p>-->
+
+    <ng-template #content>
+        <div *ngIf="showModal" class="modal">
+            <div class="modal-content">
+                <span class="modal-close" (click)="closeModal()">×</span>
+                <h3 class="modal-title">{{ post.title }}</h3>
+                <p class="modal-author">By: {{ post.author }}</p>
+                <p class="post-content">{{ post.content }}</p>
+            </div>
+        </div>
+    </ng-template>
 </div>
+
+<ng-container *ngTemplateOutlet="content"></ng-container>
