@@ -1,11 +1,19 @@
-.create-form{
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #000000;
+.create-form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: linear-gradient(
+    135deg,    /* Angle - slight diagonal */
+    #283870,   /* Start - dark blue */
+    #202A58,   /* Mid 1 - a very dark blue */
+    #212046,  /* Mid 2 - a very dark blue-purple */
+    #32224B     /* End - a deep dark purple */
+  );
+    color: white;
 }
+
 .form-group {
   margin-bottom: 15px;
 }

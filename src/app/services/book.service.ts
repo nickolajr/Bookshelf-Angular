@@ -74,7 +74,7 @@ export class BookService {
     return this.http.delete(`${this.apiUrl}DelBook?accountId=${accountId}&bookId=${bookId}`);
     
   }
-  GetMostAddedBooks(top: number = 10): Observable<PopularBookDTO[]> {
+  GetMostAddedBooks(top: number = 12): Observable<PopularBookDTO[]> {
     return this.http.get<PopularBookDTO[]>(`${this.apiUrl}MostAddedBooks?top=${top}`);
   }
   

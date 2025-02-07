@@ -6,7 +6,7 @@
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #000;
-    color: #fff;
+    color: #fff; /* Text color white in dark mode */
   }
 }
 
@@ -14,7 +14,7 @@
 @media (prefers-color-scheme: light) {
   body {
     background-color: #fff;
-    color: #000;
+    color: #000; /* Text color black in light mode */
   }
 }
 
@@ -29,4 +29,16 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
+  color: #fff; /* Global text color set to white */
+}
+
+body{
+  
+  background: linear-gradient(
+    45deg,
+    #0A101A,    /* Very dark blue-gray  - start*/
+    #181F2A,    /* A bit lighter, darker blue-gray */
+    #2C233A,  /* A dark muted blue-purple */
+    #3D2A4B    /* Final color - a dark purple that will fit the image */
+  );
 }

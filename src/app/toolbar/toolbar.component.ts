@@ -23,6 +23,7 @@ export class ToolbarComponent {
         next: (account) => {
           this.account = account;
           this.isLoggedIn = this.loginService.convertToBoolean(this.account?.isLoggedin);
+          console.log("loggedin"+this.isLoggedIn);
         },
         error: (error) => {
           console.error('Error fetching user account:', error);
@@ -33,10 +34,10 @@ export class ToolbarComponent {
   
 
   logout() {
-    // Remove the user's session data
+    
     this.loginService.logout();
 
-    // Redirect to the login page
+    
     window.location.href = '/login';
   }
 }

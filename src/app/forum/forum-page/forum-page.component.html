@@ -1,11 +1,40 @@
-<div class="forum-container">
-  <app-forum-create></app-forum-create>
-  <h2>Forum Posts</h2>
-  <div *ngIf="loading" class="loading-indicator">Loading posts...</div>
-  <div *ngIf="!loading" class="post-list">
-    <app-forum-post *ngFor="let post of posts" [post]="post"></app-forum-post>
-  </div>
-  <div *ngIf="posts.length == 0 && !loading" class="no-posts">
+<div class="app-forum-page">
+  <div class="forum-container">
+    <div class="create-post-section">
+      <app-forum-create></app-forum-create>
+      <img src="https://drive.hollowhuu.com/seafhttp/files/faef88f6-d3f8-4e20-9313-b58ce2b13657/iku.png"
+           alt="Forum Image"
+           class="forum-image">
+    </div>
+
+    <h2>Forum Posts</h2>
+
+    <div *ngIf="loading" class="loading-indicator">Loading posts...</div>
+
+    <div class="post-list">
+      <app-forum-post *ngFor="let post of posts" [post]="post"></app-forum-post>
+    </div>
+
+    <div *ngIf="posts.length === 0 && !loading" class="no-posts">
       <p>There are no posts yet!</p>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+        <button (click)="goToPage(1)" [disabled]="currentPage === 1">First</button>
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+
+        <span *ngFor="let pageNumber of getPaginationArray()">
+            <button *ngIf="!isEllipsis(pageNumber)"
+                (click)="goToPage(pageNumber)"
+                [class.active]="pageNumber === currentPage">
+                {{ pageNumber }}
+            </button>
+            <span *ngIf="isEllipsis(pageNumber)">...</span>
+        </span>
+
+        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+        <button (click)="goToPage(totalPages)" [disabled]="currentPage === totalPages">Last</button>
+    </div>
   </div>
 </div>

@@ -1,3 +1,4 @@
+
 /* General button styles */
 button {
   color: white;
@@ -39,7 +40,7 @@ button.book-cover {
   display: block;
   width: 80%;
   height: 100%;
-  background-color: rgb(39, 35, 35);
+  background-color: rgb(38, 35, 39);
   border: none;
 }
 
@@ -261,4 +262,22 @@ button.book-cover {
 
 .delete-book-button:hover {
   background-color: rgb(37, 37, 37); /* Slightly lighter grey on hover */
+}
+.center-div {
+  background: linear-gradient(
+    45deg,
+    #0A101A,    /* Very dark blue-gray  - start*/
+    #181F2A,    /* A bit lighter, darker blue-gray */
+    #2C233A,  /* A dark muted blue-purple */
+    #3D2A4B    /* Final color - a dark purple that will fit the image */
+  );
+}
+.h1{
+  background: linear-gradient(
+    45deg,
+    #0A101A,    /* Very dark blue-gray  - start*/
+    #181F2A,    /* A bit lighter, darker blue-gray */
+    #2C233A,  /* A dark muted blue-purple */
+    #3D2A4B    /* Final color - a dark purple that will fit the image */
+  );
 }

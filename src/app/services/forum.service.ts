@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../enviroment/enviroment';
 
@@ -8,7 +8,15 @@ export interface ForumPost {
   title: string;
   content: string;
   accountId: number;
-  replies?: { id: number, content: string }[]; // Add replies as an optional field
+  replies?: { id: number, content: string }[];
+}
+
+export interface PaginatedResponse {
+  totalPosts: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  posts: ForumPost[];
 }
 
 @Injectable({
@@ -19,17 +27,20 @@ export class ForumService {
 
   constructor(private http: HttpClient) {}
 
-  getPosts(): Observable<ForumPost[]> {
-    return this.http.get<ForumPost[]>(this.apiUrl);
+  getPosts(page: number = 1, pageSize: number = 10): Observable<PaginatedResponse> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+
+    return this.http.get<PaginatedResponse>(this.apiUrl, { params: params });
   }
 
   createPost(post: ForumPost): Observable<ForumPost> {
-    
     const postData = {
-      ...post,        // Spread the existing post data
-      replies: []     
+      ...post,
+      replies: []
     };
-    
+
     return this.http.post<ForumPost>(this.apiUrl, postData);
   }
 }

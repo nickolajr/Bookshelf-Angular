@@ -3,12 +3,18 @@
     padding: 15px;
     margin: 10px 0;
     border-radius: 5px;
-    background-color: #000000;
      width: calc(30% - 20px); /* Take 30% width of the container with some spacing */
      box-sizing: border-box;
      min-width: 300px;
+     background: linear-gradient(
+      135deg,    /* Angle - slight diagonal */
+      #283870,   /* Start - dark blue */
+      #202A58,   /* Mid 1 - a very dark blue */
+      #212046,  /* Mid 2 - a very dark blue-purple */
+      #32224B     /* End - a deep dark purple */
+     )
   }
-  
+
   .post-content {
     margin-bottom: 10px;
     white-space: pre-line; /* For multiline text */
