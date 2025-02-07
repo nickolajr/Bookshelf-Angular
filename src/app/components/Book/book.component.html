@@ -14,7 +14,7 @@
     <div class="search">
       <label>Enter Title</label>
       <input type="text" (change)="Title($event)" /><br />
-      <button (click)="GetByTitle()">Test</button><br />
+      <button class="my-search-button"(click)="GetByTitle()">Search</button><br />
       <table class="center-div">
         <tbody class="center-div">
           <div class="book-list" *ngIf="booklist.length > 0">

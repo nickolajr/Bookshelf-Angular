@@ -312,3 +312,23 @@ button.book-cover {
     #3D2A4B  /* Final color - a dark purple that will fit the image */
   );
 }
+.my-search-button {
+  background: linear-gradient(45deg,
+  #0A101A, 
+  #181F2A, 
+  #2C233A, 
+  #3D2A4B  
+);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}

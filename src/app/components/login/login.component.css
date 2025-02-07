@@ -9,19 +9,19 @@
     --button-text-color: #fff;
     --spine-color: #495057;
     --accent-color: #007bff;
-    /* No more shape color */
+  
   }
   
-  /* Reset the book-container to be relative */
+ 
   .book-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     position: relative;
-    /* Re-establish relative positioning */
+
     z-index: 2;
-    /* Ensure book is above particles */
+    
   }
   
   /* Styles for the particle container */
@@ -34,7 +34,7 @@
     background-color: var(--book-background);
     background-image: linear-gradient(to bottom, var(--book-background), #34495e);
     z-index: 0;
-    /* Place particles behind content */
+
   }
   
   .book {
@@ -47,7 +47,7 @@
     border-radius: 5px;
     position: relative;
     z-index: 3;
-    /* Ensure book is above particles */
+ 
   }
   
   .book:hover {
