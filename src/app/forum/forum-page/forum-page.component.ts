@@ -10,7 +10,7 @@ export class ForumPageComponent implements OnInit {
   posts: ForumPost[] = [];
   loading: boolean = true;
   currentPage: number = 1;
-  pageSize: number = 16;  // Default page size for PC)
+  pageSize: number = 16;  // Default page size for PC
   totalPosts: number = 0;
   totalPages: number = 0;
   pageNumbers: number[] = [];
@@ -34,7 +34,7 @@ export class ForumPageComponent implements OnInit {
       this.pageSize = 4;
     } else if (screenWidth < 1200) { //tablet screen
       this.pageSize = 8;
-    } else {// pc
+    } else {// pc screen
       this.pageSize = 16;
     }
 

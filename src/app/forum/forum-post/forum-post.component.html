@@ -1,27 +1,57 @@
 <div class="forum-post">
-    <h3>{{ post.title }}</h3>
+  <h3>{{ post.title }}</h3>
 
-    <div *ngIf="isTruncated" class="truncated-text post-content">
-      {{ truncatedContent }}
-    </div>
+  <div *ngIf="isTruncated" class="truncated-text post-content">
+    {{ truncatedContent }}
+  </div>
 
-    <div *ngIf="!isTruncated" class="post-content">
-      {{ truncatedContent }}
-    </div>
+  <div *ngIf="!isTruncated" class="post-content">
+    {{ truncatedContent }}
+  </div>
 
-    <a class="read-more" (click)="openModal()">Read More</a>
-    <!--<p class="post-date">Posted at: {{ post.createdAt | date:'medium' }}</p>-->
+  <a class="read-more" (click)="openModal()">Read More</a>
+  <!--<p class="post-date">Posted at: {{ post.createdAt | date:'medium' }}</p>-->
 
-    <ng-template #content>
-        <div *ngIf="showModal" class="modal">
-            <div class="modal-content">
-                <span class="modal-close" (click)="closeModal()">×</span>
-                <h3 class="modal-title">{{ post.title }}</h3>
-                <p class="modal-author">By: {{ post.author }}</p>
-                <p class="post-content">{{ post.content }}</p>
-            </div>
-        </div>
-    </ng-template>
+  <ng-template #content>
+      <div *ngIf="showModal" class="modal">
+          <div class="modal-content">
+              <span class="modal-close" (click)="closeModal()">×</span>
+              <h3 class="modal-title">{{ post.title }}</h3>
+              <p class="modal-author">By: {{ post.author }}</p>
+              <p class="post-content">{{ post.content }}</p>
+
+              <!-- Replies Section -->
+              <div class="replies-section">
+                <h3>Replies</h3>
+                <div *ngIf="repliesLoading">Loading replies...</div>
+                <div *ngIf="!repliesLoading && replies.length === 0">No replies yet.</div>
+
+                <ul *ngIf="!repliesLoading && replies.length > 0" class="replies-list">
+                  <li *ngFor="let reply of replies" class="reply-item">
+                    <div class="reply-author">
+                      {{reply.username}}
+                    </div>
+                    {{ reply.content }}
+                  </li>
+                </ul>
+                
+                <!-- Replies Pagination -->
+                <div class="pagination" *ngIf="repliesTotalPages > 1">
+                    <button (click)="goToRepliesPage(1)" [disabled]="repliesCurrentPage === 1">First</button>
+                    <button (click)="goToRepliesPage(repliesCurrentPage - 1)" [disabled]="repliesCurrentPage === 1">Previous</button>
+                    <span>Page {{ repliesCurrentPage }} of {{ repliesTotalPages }}</span>
+                    <button (click)="goToRepliesPage(repliesCurrentPage + 1)" [disabled]="repliesCurrentPage === repliesTotalPages">Next</button>
+                    <button (click)="goToRepliesPage(repliesTotalPages)" [disabled]="repliesCurrentPage === repliesTotalPages">Last</button>
+                </div>
+              </div>
+              <!-- Add Reply Form -->
+              <div class="add-reply-form">
+                <textarea [(ngModel)]="newReplyContent" placeholder="Write a reply..."></textarea>
+                <button (click)="addReply()">Add Reply</button>
+              </div>
+          </div>
+      </div>
+  </ng-template>
 </div>
 
 <ng-container *ngTemplateOutlet="content"></ng-container>

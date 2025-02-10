@@ -3,23 +3,18 @@
   padding: 15px;
   margin: 10px 0;
   border-radius: 5px;
-  width: calc(30% - 20px); /* Take 30% width of the container with some spacing */
+  width: calc(30% - 20px);
   box-sizing: border-box;
   min-width: 300px;
-  background: linear-gradient(
-    135deg,    /* Angle - slight diagonal */
-    #283870,   /* Start - dark blue */
-    #202A58,   /* Mid 1 - a very dark blue */
-    #212046,  /* Mid 2 - a very dark blue-purple */
-    #32224B     /* End - a deep dark purple */
-  );
+  background: linear-gradient(135deg, #283870, #202A58, #212046, #32224B);
+  color: white; /* Added for better text visibility on the background */
 }
 
 .post-content {
   margin-bottom: 10px;
-  white-space: pre-line; /* For multiline text */
-  word-break: break-word; /* Prevent long words from overflowing */
-  overflow-wrap: break-word; /* Alternative for word-break */
+  white-space: pre-line;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .post-date {
@@ -28,104 +23,165 @@
 }
 
 .read-more {
-  color: #007bff; /* Link color */
+  color: #007bff;
   cursor: pointer;
   text-decoration: none;
 }
 
 /* Modal styles */
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(10, 16, 26, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 16, 26, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
-    background: linear-gradient(45deg, #0A101A, #181F2A, #2C233A, #3D2A4B);
-    color: white;
-    border: 1px solid #555;
-    border-radius: 10px;
-    padding: 20px;
-    width: 80%;
-    max-width: 600px;
-    box-sizing: border-box;
-    position: relative; /* This is key for positioning the close button */
+  background: linear-gradient(45deg, #0A101A, #181F2A, #2C233A, #3D2A4B);
+  color: white;
+  border: 1px solid #555;
+  border-radius: 10px;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .modal-title {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .modal-close {
-    color: #ddd;
-    position: absolute; /* Absolute positioning relative to .modal-content */
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
+  color: #ddd;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 .modal-close:hover {
-    color: white;
+  color: white;
 }
 
 .modal-author {
-    font-style: italic;        
-    margin-bottom: 10px;    
-    color: #bbb;             
-    text-align: center;        
+  font-style: italic;
+  margin-bottom: 10px;
+  color: #bbb;
+  text-align: center;
 }
 
 /* Truncation styles */
 .truncated-text {
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 1; /* Number of lines to show */
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  max-height: 4.5em; /* Set a maximum height based on line height */
-  word-break: break-word; /* Prevent overflowing */
-  overflow-wrap: break-word; /* Alternative for word-break */
+  max-height: 4.5em;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
-/* Enhanced style for the signup button */
-.signup-button {
-  background-color: var(--accent-color);
-  color: var(--button-text-color);
-  padding: 12px 24px;             /* Increased padding for a larger click area */
-  border: 2px solid transparent;  /* A border that can animate if needed */
-  border-radius: 6px;             /* Slightly more rounded corners */
+
+/* Reply Section Styles */
+.replies-section {
+  margin-top: 20px;
+}
+
+.replies-list {
+  list-style: none;
+  padding: 0;
+}
+
+.reply-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.05); /* Subtle background for each reply */
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.reply-author {
+  font-size: 0.9em;
+  color: #aaa;
+  margin-bottom: 5px;
+}
+
+/* Add Reply Form Styles */
+.add-reply-form {
+  margin-top: 20px;
+}
+
+.add-reply-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #777;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+  resize: vertical;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.add-reply-form textarea::placeholder {
+  color: #ccc;
+}
+
+.add-reply-form button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1.1em;               /* Slightly larger text for clarity */
-  font-weight: bold;              /* Emphasize the button text */
-  transition: background-color 0.3s ease, 
-              transform 0.2s ease, 
-              box-shadow 0.3s ease; /* Smooth transitions for interactions */
-  display: inline-block;
-  text-decoration: none;
-  margin-top: 10px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
-.signup-button:hover {
-  background-color: #0056b3;      /* A deeper blue on hover for contrast */
-  transform: scale(1.05);         /* Slightly enlarge on hover */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* A subtle shadow to indicate interactivity */
+.add-reply-form button:hover {
+  background-color: #0056b3;
 }
 
-.signup-button:active {
-  transform: scale(0.98);         /* A brief shrink on click for a pressed effect */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-.signup-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Optional: a focus ring for accessibility */
+.pagination button {
+  padding: 8px 12px;
+  margin: 0 5px;
+  border: 1px solid #555;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination button:hover:enabled {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  color: white;
+  margin: 0 10px;
+  align-self: center;
 }

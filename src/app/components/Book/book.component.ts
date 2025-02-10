@@ -11,6 +11,9 @@ import { ErrorResponse, VolumeService } from 'src/app/services/volume.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Account } from 'src/app/models/Account';
 
+
+
+
 interface ApiResponse {
     data: {
         Media: Book;
@@ -21,12 +24,13 @@ interface BookList {
     progress: BookProgress;
     book: Book;
 }
-
+declare var particlesJS: any
 @Component({
     selector: 'BookInfo',
     templateUrl: './book.component.html',
     styleUrls: ['./book.component.css']
 })
+
 export class BookComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     isLoggedIn: boolean = false;
@@ -67,6 +71,9 @@ export class BookComponent implements OnInit, OnDestroy, AfterViewChecked {
         private loginService: LoginService) { }
 
     ngOnInit(): void {
+    particlesJS.load('particles-js', 'assets/particlesjs-config.json', function() {
+      console.log('particles.js loaded...');
+    });
         this.accountSubscription = this.loginService.currentUser$
             .pipe(take(1))
             .subscribe({

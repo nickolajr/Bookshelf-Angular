@@ -70,7 +70,8 @@ button.book-cover {
   text-align: center;
   align-items: center;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto;  
+  
 }
 
 /* Modal styles (REPLACED) */
@@ -295,14 +296,6 @@ button.book-cover {
   background-color: rgb(37, 37, 37); /* Slightly lighter grey on hover */
 }
 
-.center-div {
-  background: linear-gradient(45deg,
-    #0A101A, /* Very dark blue-gray  - start*/
-    #181F2A, /* A bit lighter, darker blue-gray */
-    #2C233A, /* A dark muted blue-purple */
-    #3D2A4B  /* Final color - a dark purple that will fit the image */
-  );
-}
 
 .h1 {
   background: linear-gradient(45deg,
@@ -332,3 +325,20 @@ button.book-cover {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--book-background);
+  background-image: linear-gradient(to bottom, var(--book-background), #34495e);
+  z-index: 0;
+  
+  }
+  body {
+    position: relative; 
+    z-index: 1;        
+    min-height: 100vh;
+    margin: 0;            
+  }

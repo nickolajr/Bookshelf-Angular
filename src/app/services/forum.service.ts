@@ -8,8 +8,15 @@ export interface ForumPost {
   title: string;
   content: string;
   accountId: number;
-  replies?: { id: number, content: string }[];
-  author: string; 
+  replies?: Reply[];
+  author: string;
+}
+
+export interface Reply {
+  id: number;
+  content: string;
+  accountId: number;
+  username: string; // Add username property
 }
 
 export interface PaginatedResponse {
@@ -20,13 +27,27 @@ export interface PaginatedResponse {
   posts: ForumPost[];
 }
 
+export interface PaginatedReplies {
+  totalReplies: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  replies: Reply[];
+}
+
+export interface addReplyDto {
+    content: string;
+    accountId: number;
+}
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class ForumService {
   private apiUrl = environment.apiUrl + 'forum';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getPosts(page: number = 1, pageSize: number = 10): Observable<PaginatedResponse> {
     let params = new HttpParams()
@@ -34,6 +55,19 @@ export class ForumService {
       .set('pageSize', pageSize.toString());
 
     return this.http.get<PaginatedResponse>(this.apiUrl, { params: params });
+  }
+
+  getReplies(postId: number, page: number = 1, pageSize: number = 5): Observable<PaginatedReplies> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+
+    return this.http.get<PaginatedReplies>(`${this.apiUrl}/${postId}/replies`, { params: params });
+  }
+
+  addReply(postId: number, content: string, accountId: number): Observable<any> {
+      const body:addReplyDto = { content, accountId };
+    return this.http.post(`${this.apiUrl}/${postId}/replies`, body);
   }
 
   createPost(post: ForumPost): Observable<ForumPost> {
