@@ -40,6 +40,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  overflow: auto;
 }
 
 .modal-content {
@@ -52,6 +53,10 @@
   max-width: 600px;
   box-sizing: border-box;
   position: relative;
+  height: auto;
+  
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modal-title {
@@ -184,4 +189,7 @@
   color: white;
   margin: 0 10px;
   align-self: center;
+}
+body.modal-open {
+  overflow: hidden;
 }

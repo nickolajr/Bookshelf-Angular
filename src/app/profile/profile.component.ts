@@ -1,20 +1,27 @@
+// profile.component.ts
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { Account } from '../models/Account';
 import { LoginService } from '../services/login.service';
-import { Subscription, take  } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent{
+export class ProfileComponent implements OnInit, OnDestroy {
   public account: Account | null = null;
   private accountSubscription: Subscription | undefined;
   public isLoggedIn: boolean = false;
   public isopen: boolean = false;
+
+  // Modal visibility flags
+  public showChangeEmailModal: boolean = false;
+  public showChangeUsernameModal: boolean = false;
+  public showChangePasswordModal: boolean = false;
 
   constructor(
     private service: AccountService,
@@ -29,8 +36,8 @@ export class ProfileComponent{
         next: (account) => {
           this.account = account;
           this.isLoggedIn = this.convertToBoolean(this.account?.isLoggedin);
-          console.log("isloggedin: " + this.account?.isLoggedin);
-          console.log("isLoggedIn: " + this.isLoggedIn);         
+          console.log('isloggedin: ' + this.account?.isLoggedin);
+          console.log('isLoggedIn: ' + this.isLoggedIn);
         },
         error: (error) => {
           console.error('Error fetching user account:', error);
@@ -38,10 +45,17 @@ export class ProfileComponent{
         },
       });
   }
+
+  ngOnDestroy(): void {
+    if (this.accountSubscription) {
+      this.accountSubscription.unsubscribe();
+    }
+  }
+
   private convertToBoolean(value: string | undefined): boolean {
-    if (value === "1") {
+    if (value === '1') {
       return true;
-    } else if (value === "0") {
+    } else if (value === '0') {
       return false;
     }
     throw new Error(`Invalid value: ${value}. Expected "1" or "0".`);
@@ -54,10 +68,8 @@ export class ProfileComponent{
       console.warn('No account data available.');
     }
   }
-  
 
   DelAcc() {
-
     let accountId = sessionStorage.getItem('accountId');
     if (!accountId) return;
     this.service.DelAcc(parseInt(accountId)).subscribe(() => {
@@ -68,7 +80,33 @@ export class ProfileComponent{
       this.router.navigate(['/login']);
     });
   }
+
   toggle() {
     this.isopen = !this.isopen;
+  }
+
+  // Modal control functions
+  openChangeEmailModal() {
+    this.showChangeEmailModal = true;
+  }
+
+  closeChangeEmailModal() {
+    this.showChangeEmailModal = false;
+  }
+
+  openChangeUsernameModal() {
+    this.showChangeUsernameModal = true;
+  }
+
+  closeChangeUsernameModal() {
+    this.showChangeUsernameModal = false;
+  }
+
+  openChangePasswordModal() {
+    this.showChangePasswordModal = true;
+  }
+
+  closeChangePasswordModal() {
+    this.showChangePasswordModal = false;
   }
 }

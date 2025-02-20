@@ -1,16 +1,72 @@
 <div class="profile-container">
-   <h2>Profile</h2>
-   <div *ngIf="account">
-     <p><strong>ID:</strong> {{ account.id }}</p> <!-- Display account ID -->
-     <p><strong>Username:</strong> {{ account.userName }}</p>
-     <p><strong>Email:</strong> {{ account.email }}</p>
-     <button (click)="toggle()">Settings</button>
-     <div *ngIf="isopen" class="settings">
-       <button class="delete-btn" (click)="DelAcc()">Delete Account</button>
-     </div>
-   </div>
-   <div *ngIf="!account">
-     <p>Please Login</p>
-   </div>
- </div>
- 
+  <div class="profile-header">
+    <h2>Profile Settings</h2>
+  </div>
+
+  <div class="profile-content">
+    <!-- Profile Picture Section -->
+    <div class="profile-picture-section">
+      <div class="avatar-wrapper">
+        <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-avatar">
+        <div class="avatar-overlay">
+          <button class="upload-btn">Upload</button>
+        </div>
+      </div>
+      <h3>{{ account?.userName }}</h3>
+    </div>
+
+    <!-- Account Info Section -->
+    <div *ngIf="account" class="account-info">
+      <div class="info-card">
+        <h4>Account Information</h4>
+        <div class="info-item">
+          <label>ID:</label>
+          <span>{{ account.id }}</span>
+        </div>
+        <div class="info-item">
+          <label>Username:</label>
+          <span>{{ account.userName }}</span>
+          <button class="edit-btn">Edit</button>
+        </div>
+        <div class="info-item">
+          <label>Email:</label>
+          <span>{{ account.email }}</span>
+          <button class="edit-btn">Edit</button>
+        </div>
+        <div class="info-item">
+          <label>Bio:</label>
+          <span>{{account.Bio}}</span>
+          <button class="edit-btn">Edit</button>
+        </div>
+      </div>
+
+      <!-- Security Section -->
+      <div class="info-card">
+        <h4>Security</h4>
+        <div class="info-item">
+          <label>Password:</label>
+          <span>••••••••</span>
+          <button class="edit-btn">Change</button>
+        </div>
+      </div>
+
+      <!-- Danger Zone -->
+      <div class="info-card danger-zone">
+        <h4>Danger Zone</h4>
+        <button class="delete-btn" (click)="toggle()">Delete Account</button>
+        <div *ngIf="isopen" class="settings-modal">
+          <p>Are you sure you want to delete your account?</p>
+          <div class="modal-actions">
+            <button class="confirm-btn" (click)="DelAcc()">Confirm</button>
+            <button class="cancel-btn" (click)="toggle()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!account" class="login-prompt">
+      <p>Please login to view your profile</p>
+      <button class="login-btn" routerLink="/login">Login</button>
+    </div>
+  </div>
+</div>

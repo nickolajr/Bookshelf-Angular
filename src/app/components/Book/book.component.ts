@@ -88,7 +88,7 @@ export class BookComponent implements OnInit, OnDestroy, AfterViewChecked {
                 },
                 error: (error) => {
                     console.error('Error fetching user account:', error);
-                    // Handle error (e.g., display message)
+                    
                 },
             });
     }
@@ -102,7 +102,7 @@ export class BookComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
 
 
-    // label changes
+    
     Title(event: any) {
         this.title = event.target.value;
         console.log(this.title);

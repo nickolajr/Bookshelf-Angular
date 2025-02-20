@@ -1,6 +1,10 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ForumPost, ForumService, Reply, PaginatedReplies } from 'src/app/services/forum.service';
-
+import { Account } from 'src/app/models/Account';
+import { LoginService } from 'src/app/services/login.service';
+import { AccountService } from 'src/app/services/account.service';
+import { Subscription, take } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-forum-post',
   templateUrl: './forum-post.component.html',
@@ -13,21 +17,39 @@ export class ForumPostComponent implements OnInit {
   isTruncated: boolean = false;
   truncatedContent: string = '';
   showModal: boolean = false;
-  private maxLength: number = 150; // Adjust the max length as needed
+  private maxLength: number = 150; 
 
-  // Reply Properties
+  
   newReplyContent: string = '';
   replies: Reply[] = [];
   repliesLoading: boolean = false;
   repliesCurrentPage: number = 1;
-  repliesPageSize: number = 5; // Adjust page size as needed
+  repliesPageSize: number = 5; 
   repliesTotalPages: number = 0;
-  accountId: number = 1; // Replace with your actual account ID logic
-
-  constructor(private forumService: ForumService) { }
+  
+  public account: Account | null = null;
+  private accountSubscription: Subscription | undefined;
+  constructor(private forumService: ForumService,private loginService: LoginService,private service: AccountService,) { }
+  public isLoggedIn: boolean = false;
+  
 
   ngOnInit(): void {
+    this.accountSubscription = this.loginService.currentUser$
+      .pipe(take(1))
+      .subscribe({
+        next: (account) => {
+          this.account = account;
+          this.isLoggedIn = this.convertToBoolean(this.account?.isLoggedin);
+          console.log("isloggedin: " + this.account?.isLoggedin);
+          console.log("isLoggedIn: " + this.isLoggedIn);         
+        },
+        error: (error) => {
+          console.error('Error fetching user account:', error);
+       
+        },
+      });
     this.truncateText();
+    
   }
 
   truncateText(): void {
@@ -37,19 +59,31 @@ export class ForumPostComponent implements OnInit {
         this.isTruncated = true;
       } else {
         this.isTruncated = false;
-        this.truncatedContent = this.post.content; // Set truncatedContent to the full content
+        this.truncatedContent = this.post.content; 
       }
     }
   }
+ 
 
+
+  private convertToBoolean(value: string | undefined): boolean {
+    if (value === "1") {
+      return true;
+    } else if (value === "0") {
+      return false;
+    }
+    throw new Error(`Invalid value: ${value}. Expected "1" or "0".`);
+  }
   openModal(): void {
     this.showModal = true;
-    this.loadReplies();  // Load replies when modal opens
+    this.loadReplies(); 
+    document.body.classList.add('modal-open');
     console.log(this.post.id)
   }
 
   closeModal(): void {
     this.showModal = false;
+    document.body.classList.remove('modal-open');
   }
 
   loadReplies(): void {
@@ -64,21 +98,30 @@ export class ForumPostComponent implements OnInit {
       });
   }
 
-   addReply(): void {
+  addReply(): void {
     if (!this.post || !this.post.id || !this.newReplyContent) {
-      console.warn("Cannot add reply: Missing post, post ID, or reply content."); // Log the error
+      console.warn("Cannot add reply: Missing post, post ID, or reply content."); 
       return;
     }
   
-    this.forumService.addReply(this.post.id, this.newReplyContent, this.accountId)
+    // Convert account ID from string to number
+    const accountId = this.account?.id ? Number(this.account.id) : null;
+  
+    // Validate the account ID
+    if (accountId === null || isNaN(accountId)) {
+      console.warn("Cannot add reply: Invalid account ID.");
+      return;
+    }
+  
+    // add the reply
+    this.forumService.addReply(this.post.id, this.newReplyContent, accountId)
       .subscribe({
-        next: () => { // Use named parameters
-          this.newReplyContent = '';  // Clear input
-          this.loadReplies(); // Reload replies
+        next: () => { 
+          this.newReplyContent = '';  
+          this.loadReplies(); 
         },
         error: (error) => {
           console.error('Error adding reply:', error); // Log the error
-          // Optionally display an error message to the user
         }
       });
   }
