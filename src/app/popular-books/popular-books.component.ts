@@ -21,7 +21,7 @@ export class PopularBooksComponent implements OnInit, OnDestroy {
     private accountSubscription: Subscription | undefined;
     public isLoggedIn: boolean = false;
     selectedBook: Book | null = null;
-
+    description:string="auksbglkjdaslnbdksankjdnlnsadlksandlsamndaæoislkdsaæoidlksajdoalkdjaæslidksad";
 
     constructor(private bookService: BookService, private loginService: LoginService) {
         this.modalSubscription = this.bookService.modalOpen$.subscribe((isOpen) => {

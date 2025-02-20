@@ -22,24 +22,31 @@ export class RegisterComponent {
     });
   constructor(private accountService: AccountService, private loginService: LoginService, private router: Router) { }
 
-   register() {
-     if (this.registerForm.valid) {
-         const registerRequest: CreateAccountRequest = {
-            email: this.registerForm.value.Email!,
-              password: this.registerForm.value.Password!,
-               userName: this.registerForm.value.UserName!
-             };
-             console.log(this.registerForm)
-             this.accountService.register(registerRequest).subscribe(
-                 (data: any) => {
-                     console.log('registration successfull', data);
-                     this.router.navigate(['/login']);
-              },
-               (error: any) => {
-                   console.log(error);
-                  alert('Registration failed');
-            }
-         );
-     }
+   // Add to component class
+isSubmitting = false;
+
+// Update register method
+register() {
+  if (this.registerForm.valid) {
+    this.isSubmitting = true;
+    const registerRequest: CreateAccountRequest = {
+      email: this.registerForm.value.Email!,
+      password: this.registerForm.value.Password!,
+      userName: this.registerForm.value.UserName!
+    };
+
+    this.accountService.register(registerRequest).subscribe({
+      next: (data) => {
+        console.log('Registration successful', data);
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error(error);
+        alert('Registration failed');
+        this.isSubmitting = false;
+      },
+      complete: () => this.isSubmitting = false
+    });
+  }
 }
 }

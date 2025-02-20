@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,6 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements AfterViewInit {
   loginForm: FormGroup;
+  isSubmitting = false;
+  isPasswordVisible = false;  // New property for password visibility
 
   constructor(private loginService: LoginService, private router: Router, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
@@ -20,22 +20,26 @@ export class LoginComponent implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    
+  togglePasswordVisibility(): void {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
+
+  ngAfterViewInit(): void { }
 
   login() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value)
-      this.loginService.login(this.loginForm.value).subscribe(
-        (data: any) => {
+      this.isSubmitting = true;
+      this.loginService.login(this.loginForm.value).subscribe({
+        next: (data) => {
           this.router.navigate(['/library']);
         },
-        (error: any) => {
-          console.log(error);
+        error: (error) => {
+          console.error(error);
           alert('Login failed');
-        }
-      );
+          this.isSubmitting = false;
+        },
+        complete: () => this.isSubmitting = false
+      });
     }
   }
 }

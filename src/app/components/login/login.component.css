@@ -1,187 +1,193 @@
-/* A more general and complementary color scheme */
+/* Updated CSS */
 :root {
-    --book-background: #2d3e50;
-    --page-color: #f9f9f9;
-    --text-color: #333;
-    --input-background: #fff;
-    --input-text-color: #555;
-    --button-color: #6c757d;
-    --button-text-color: #fff;
-    --spine-color: #495057;
-    --accent-color: #007bff;
-  
-  }
-  
- 
-  .book-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    position: relative;
+  --primary-color: #2196F3;
+  --background-gradient: linear-gradient(
+    45deg,
+    #0A101A,
+    #181F2A,
+    #2C233A,
+    #3D2A4B
+  );
+  --glass-background: rgba(255, 255, 255, 0.05);
+  --text-primary: #fff;
+  --text-secondary: #888;
+  --input-background: rgba(255, 255, 255, 0.1);
+  --input-border: rgba(255, 255, 255, 0.1);
+}
 
-    z-index: 2;
-    
-  }
-  
+.book-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--background-gradient);
+  padding: 2rem;
+}
 
-  
+.book {
+  width: 800px;
+  height: 500px;
+  background: var(--glass-background);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.left-page, .right-page {
+  width: 50%;
+  padding: 2.5rem;
+  background: var(--glass-background);
+  backdrop-filter: blur(5px);
+}
+
+.left-page {
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.page-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.welcome {
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.subtext {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-input {
+  padding: 12px 16px;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  background: var(--input-background);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.form-input.invalid {
+  border-color: #ff4444;
+}
+
+.submit-btn {
+  background: var(--primary-color);
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #1976D2;
+  transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+  background: #666;
+  cursor: not-allowed;
+}
+
+.auth-alternative {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--text-secondary);
+}
+
+.signup-button {
+  background: none;
+  color: var(--primary-color);
+  border: none;
+  padding: 8px 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signup-button:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.spine {
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--text-primary);
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
   .book {
-    width: 600px;
-    height: 400px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    display: flex;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 5px;
-    position: relative;
-    z-index: 3;
- 
-  }
-  
-  .book:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-  }
-  
-  .book.open .spine {
-    display: none;
-  }
-  
-  .left-page,
-  .right-page {
-    width: 50%;
-    height: 100%;
-    background-color: var(--page-color);
-    padding: 20px;
-    box-sizing: border-box;
-    border-radius: 0;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%232D3748' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+    height: auto;
+    width: 90%;
   }
   
-  .left-page {
-    border-radius: 5px 0 0 5px;
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  
-  .right-page {
-    border-radius: 0 5px 5px 0;
-  }
-  
-  .page-content {
-    width: 80%;
-    text-align: center;
-  }
-  
-  .page-content h1,
-  .page-content h2,
-  .page-content p {
-    color: var(--text-color);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  }
-  
-  .page-content a {
-    color: var(--accent-color);
-    text-decoration: none;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
+  .left-page, .right-page {
     width: 100%;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: var(--text-color);
-  }
-  
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: var(--input-background);
-    color: var(--input-text-color);
-    transition: box-shadow 0.3s ease;
-  }
-  
-  input[type="text"]:focus,
-  input[type="password"]:focus {
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    outline: none;
-  }
-  
-  button {
-    background-color: var(--button-color);
-    color: var(--button-text-color);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  button:hover {
-    background-color: #5a6268;
-    transform: scale(1.05);
-  }
-  
-  button:disabled {
-    background-color: #868e96;
-    color: #fff;
-    cursor: not-allowed;
-    transform: none;
+    padding: 1.5rem;
   }
   
   .spine {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;
-    height: 100%;
-    background-color: var(--spine-color);
-    color: var(--text-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2em;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    border-radius: 0;
-    box-shadow: 0 0 10px rgba(73, 80, 87, 0.3);
+    display: none;
   }
-  
-  /* Style for signup button */
-  .signup-button {
-    background-color: var(--accent-color);
-    color: var(--button-text-color);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: inline-block;
-    text-decoration: none;
-    margin-top: 10px;
-    color: #007bff; 
-  }
-  
-  .signup-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-  }
-  
-  .signup-button:active {
-    transform: scale(0.95);
-  }
+}
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper .form-input {
+  width: 100%;
+  padding-right: 60px; /* Ensure there's room for the toggle button */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 4px;
+}
+
+.toggle-password:focus {
+  outline: none;
+}

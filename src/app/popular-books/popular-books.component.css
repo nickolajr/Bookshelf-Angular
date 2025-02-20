@@ -3,40 +3,57 @@
   flex-wrap: wrap;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  align-items: flex-start; /* Change from center to flex-start */
-  justify-content: flex-start; /* Change from center to flex-start */
+  align-items: flex-start;
+  justify-content: flex-start;
   margin: 0 auto;
   gap: 20px; /* Space between items */
 }
 
 .book-list > div {
+  display: flex;
+  flex-wrap: nowrap; /* Keep button and description on the same row */
+  align-items: flex-start; /* Align items at the top */
+  gap: 10px; /* Space between the button and description */
+  
   padding: 10px;
   border: 1px solid #ddd;
-  width: calc(33.33% - 20px); /* Makes each item take up 1/3 of the container width */
+  width: calc(33.33% - 20px); /* Default: 3 items per row */
   box-sizing: border-box;
-  flex: 0 0 auto; /* Prevent items from expanding */
+  flex: 0 0 auto;
 }
 
-.book-list > div h3 {
-  font-size: 1.5rem;
-  margin: 0;
+
+.book-list > div button {
+  flex: 0 0 auto;
+  max-width: 100%;
 }
 
-.book-list > div p {
-  font-size: 1rem;
-  color: #555;
+
+.book-list > div .description {
+  flex: 1 1 auto;
+  min-width: 0; /* Allow the description to shrink if needed */
+  white-space: normal; /* Allow text to wrap within the box */
+  word-wrap: break-word; /* Break long words to prevent overflow */
+  overflow-wrap: break-word;
 }
 
-/* Responsive styles for tablet */
-@media (max-width: 768px) {
+/* Responsive styles for tablets */
+@media (max-width: 1024px) {
   .book-list > div {
-    width: calc(50% - 20px); /* Two items per row on tablets */
+    width: calc(50% - 20px); /* 2 items per row */
   }
 }
 
 /* Responsive styles for mobile */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .book-list > div {
-    width: 100%; /* One item per row on mobile */
+    width: 100%; 
+    flex-direction: column; 
+    align-items: center; 
+  }
+
+  .book-list > div .description {
+    text-align: center;
+    max-width: 90%;
   }
 }

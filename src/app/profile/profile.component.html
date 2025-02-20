@@ -7,9 +7,10 @@
     <!-- Profile Picture Section -->
     <div class="profile-picture-section">
       <div class="avatar-wrapper">
-        <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-avatar">
+        <img [src]="profilePicture || 'https://via.placeholder.com/150'" alt="Profile Picture" class="profile-avatar">
         <div class="avatar-overlay">
-          <button class="upload-btn">Upload</button>
+          <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;" #fileInput>
+          <button class="upload-btn" (click)="fileInput.click()">Upload</button>
         </div>
       </div>
       <h3>{{ account?.userName }}</h3>
@@ -25,18 +26,27 @@
         </div>
         <div class="info-item">
           <label>Username:</label>
-          <span>{{ account.userName }}</span>
-          <button class="edit-btn">Edit</button>
+          <span *ngIf="!editUsername">{{ account.userName }}</span>
+          <input *ngIf="editUsername" [(ngModel)]="account.userName" placeholder="New Username">
+          <button class="edit-btn" (click)="toggleEdit('username')">
+            {{ editUsername ? 'Save' : 'Edit' }}
+          </button>
         </div>
         <div class="info-item">
           <label>Email:</label>
-          <span>{{ account.email }}</span>
-          <button class="edit-btn">Edit</button>
+          <span *ngIf="!editEmail">{{ account.email }}</span>
+          <input *ngIf="editEmail" [(ngModel)]="account.email" placeholder="New Email">
+          <button class="edit-btn" (click)="toggleEdit('email')">
+            {{ editEmail ? 'Save' : 'Edit' }}
+          </button>
         </div>
         <div class="info-item">
           <label>Bio:</label>
-          <span>{{account.Bio}}</span>
-          <button class="edit-btn">Edit</button>
+          <span *ngIf="!editBio">{{ account.Bio }}</span>
+          <input *ngIf="editBio" [(ngModel)]="account.Bio" placeholder="New Bio">
+          <button class="edit-btn" (click)="toggleEdit('Bio')">
+            {{ editEmail ? 'Save' : 'Edit' }}
+          </button>
         </div>
       </div>
 
@@ -45,20 +55,23 @@
         <h4>Security</h4>
         <div class="info-item">
           <label>Password:</label>
-          <span>••••••••</span>
-          <button class="edit-btn">Change</button>
+          <span *ngIf="!editPassword">••••••••</span>
+          <input *ngIf="editPassword" type="password" [(ngModel)]="newPassword" placeholder="New Password">
+          <button class="edit-btn" (click)="toggleEdit('password')">
+            {{ editPassword ? 'Save' : 'Change' }}
+          </button>
         </div>
       </div>
 
       <!-- Danger Zone -->
       <div class="info-card danger-zone">
         <h4>Danger Zone</h4>
-        <button class="delete-btn" (click)="toggle()">Delete Account</button>
-        <div *ngIf="isopen" class="settings-modal">
+        <button class="delete-btn" (click)="toggleDeleteModal()">Delete Account</button>
+        <div *ngIf="showDeleteModal" class="settings-modal">
           <p>Are you sure you want to delete your account?</p>
           <div class="modal-actions">
             <button class="confirm-btn" (click)="DelAcc()">Confirm</button>
-            <button class="cancel-btn" (click)="toggle()">Cancel</button>
+            <button class="cancel-btn" (click)="toggleDeleteModal()">Cancel</button>
           </div>
         </div>
       </div>

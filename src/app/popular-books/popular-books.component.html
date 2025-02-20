@@ -4,11 +4,16 @@
   <div class="book-list" *ngIf="popularBooks.length > 0">
     <div *ngFor="let book of popularBooks">
       <button (click)="toggleDetails(book)">
-        <img *ngIf="book.coverImage?.large" [src]="book.coverImage.large" alt="Book cover">
+        <img
+          *ngIf="book.coverImage?.large"
+          [src]="book.coverImage.large"
+          alt="Book cover"
+        />
         <div>
           <span *ngIf="book.title?.english">{{ book.title.english }}</span>
         </div>
       </button>
+      <h4 class="description">{{this.description}}</h4>
 
       <!-- Modal -->
       <div class="modal" *ngIf="modalOpen && activeBookId === book.id">
